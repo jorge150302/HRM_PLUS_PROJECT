@@ -1,0 +1,63 @@
+﻿@model HRM_PLUS_PROJECT.Models.TipoDeduccion
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>TipoDeduccion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsTodoEmpleado" /> @Html.DisplayNameFor(model => model.IsTodoEmpleado)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinimoRango" class="control-label"></label>
+                <input asp-for="MinimoRango" class="form-control" />
+                <span asp-validation-for="MinimoRango" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaximoRango" class="control-label"></label>
+                <input asp-for="MaximoRango" class="form-control" />
+                <span asp-validation-for="MaximoRango" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsActivo" class="control-label"></label>
+                <input asp-for="IsActivo" class="form-control" />
+                <span asp-validation-for="IsActivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

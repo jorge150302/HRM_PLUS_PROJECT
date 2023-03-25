@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HRM_PLUS_PROJECT.Models.Transaccion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEmpleadoNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdTipoTransaccionNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEmpleadoNavigation.IdEmpleado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdTipoTransaccionNavigation.IdTipoTransaccion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdTransaccion">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdTransaccion">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdTransaccion">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
