@@ -18,14 +18,24 @@ namespace HRM_PLUS_PROJECT.Controllers
             _context = context;
         }
 
-        // GET: Empleados
-        public async Task<IActionResult> Index()
+        // GET: Empleado
+        public async Task<IActionResult> Index(string term = null)
         {
             var hRMPlusContext = _context.Empleados.Include(e => e.IdDepartamentoNavigation).Include(e => e.IdPuestoNavigation);
-            return View(await hRMPlusContext.ToListAsync());
+            //return View(await hRMPlusContext.ToListAsync());
+
+            return View(await hRMPlusContext.Where(x => term == null ||
+                                            x.IdEmpleado.ToString().StartsWith(term)
+                                            || x.Cedula.Contains(term)
+                                            || x.Apellido.Contains(term)
+                                            || x.Nombre.Contains(term)
+                                            || x.SalarioMensual.ToString().Contains(term)
+                                            || x.IdDepartamentoNavigation.Nombre.Contains(term)
+                                            || x.IdPuestoNavigation.Nombre.Contains(term)
+                                            || x.IsActivo.ToString().Contains(term)).ToListAsync());
         }
 
-        // GET: Empleados/Details/5
+        // GET: Empleado/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Empleados == null)
@@ -45,33 +55,53 @@ namespace HRM_PLUS_PROJECT.Controllers
             return View(empleado);
         }
 
-        // GET: Empleados/Create
+        // GET: Empleado/Create
         public IActionResult Create()
         {
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento");
-            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto");
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos.Where(x => x.IsActivo == true), "IdDepartamento", "Nombre");
+            ViewData["IdPuesto"] = new SelectList(_context.Puestos.Where(x => x.IsActivo == true), "IdPuesto", "Nombre");
             return View();
         }
 
-        // POST: Empleados/Create
+        // POST: Empleado/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEmpleado,Cedula,Nombre,Apellido,IdDepartamento,IdPuesto,SalarioMensual,FechaRegistro,IsActivo")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("IdEmpleado,Cedula,Nombre,Apellido,Telefono,IdDepartamento,IdPuesto,SalarioMensual,FechaRegistro,UsuarioCreacion,IsActivo")] Empleado empleado)
         {
+            if (!validaCedula(empleado.Cedula))
+            {
+                ModelState.AddModelError("Cedula", "Cédula incorrecta");
+            }
+
+            Puesto puestos = _context.Puestos.Find(empleado.IdPuesto);
+
+            if (empleado.SalarioMensual<puestos.SalarioMinimo) {
+                ModelState.AddModelError("SalarioMensual", "El Salario es menor al mínimo " + puestos.SalarioMinimo);
+            }
+
+            if (empleado.SalarioMensual>puestos.SalarioMaximo)
+            {
+                ModelState.AddModelError("SalarioMensual", "El Salario es mayor al máximo " + puestos.SalarioMaximo);
+            }
+
+
+            empleado.UsuarioCreacion = "Marileidy";
+            empleado.FechaRegistro = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento", empleado.IdDepartamento);
-            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", empleado.IdPuesto);
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento", "Nombre");
+            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", "Nombre");
             return View(empleado);
         }
 
-        // GET: Empleados/Edit/5
+        // GET: Empleado/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Empleados == null)
@@ -84,22 +114,43 @@ namespace HRM_PLUS_PROJECT.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento", empleado.IdDepartamento);
-            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", empleado.IdPuesto);
+
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos.Where(x => x.IsActivo == true), "IdDepartamento", "Nombre");
+            ViewData["IdPuesto"] = new SelectList(_context.Puestos.Where(x => x.IsActivo == true), "IdPuesto", "Nombre");
             return View(empleado);
         }
 
-        // POST: Empleados/Edit/5
+        // POST: Empleado/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEmpleado,Cedula,Nombre,Apellido,IdDepartamento,IdPuesto,SalarioMensual,FechaRegistro,IsActivo")] Empleado empleado)
+        public async Task<IActionResult> Edit(int id, [Bind("IdEmpleado,Cedula,Nombre,Apellido,Telefono,IdDepartamento,IdPuesto,SalarioMensual,FechaRegistro,UsuarioCreacion,IsActivo")] Empleado empleado)
         {
             if (id != empleado.IdEmpleado)
             {
                 return NotFound();
             }
+
+            if (!validaCedula(empleado.Cedula))
+            {
+                ModelState.AddModelError("Cedula", "Cédula incorrecta");
+            }
+
+            Puesto puestos = _context.Puestos.Find(empleado.IdPuesto);
+
+            if (empleado.SalarioMensual < puestos.SalarioMinimo)
+            {
+                ModelState.AddModelError("SalarioMensual", "El Salario es menor al mínimo " + puestos.SalarioMinimo);
+            }
+
+            if (empleado.SalarioMensual > puestos.SalarioMaximo)
+            {
+                ModelState.AddModelError("SalarioMensual", "El Salario es mayor al máximo " + puestos.SalarioMaximo);
+            }
+
+
+            empleado.UsuarioCreacion = "Marileidy";
 
             if (ModelState.IsValid)
             {
@@ -121,12 +172,12 @@ namespace HRM_PLUS_PROJECT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento", empleado.IdDepartamento);
-            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", empleado.IdPuesto);
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento", "Nombre");
+            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", "Nombre");
             return View(empleado);
         }
 
-        // GET: Empleados/Delete/5
+        // GET: Empleado/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Empleados == null)
@@ -146,7 +197,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             return View(empleado);
         }
 
-        // POST: Empleados/Delete/5
+        // POST: Empleado/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -169,5 +220,31 @@ namespace HRM_PLUS_PROJECT.Controllers
         {
           return (_context.Empleados?.Any(e => e.IdEmpleado == id)).GetValueOrDefault();
         }
+
+        public static bool validaCedula(string pCedula)
+        {
+            int vnTotal = 0;
+            string vcCedula = pCedula.Replace("-", "");
+            int pLongCed = vcCedula.Trim().Length;
+            int[] digitoMult = new int[11] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+
+            if (pLongCed < 11 || pLongCed > 11)
+                return false;
+
+            for (int vDig = 1; vDig <= pLongCed; vDig++)
+            {
+                int vCalculo = Int32.Parse(vcCedula.Substring(vDig - 1, 1)) * digitoMult[vDig - 1];
+                if (vCalculo < 10)
+                    vnTotal += vCalculo;
+                else
+                    vnTotal += Int32.Parse(vCalculo.ToString().Substring(0, 1)) + Int32.Parse(vCalculo.ToString().Substring(1, 1));
+            }
+
+            if (vnTotal % 10 == 0)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

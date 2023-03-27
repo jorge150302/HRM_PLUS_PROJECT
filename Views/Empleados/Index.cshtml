@@ -1,14 +1,30 @@
 ﻿@model IEnumerable<HRM_PLUS_PROJECT.Models.Empleado>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Empleados";
 }
 
-<h1>Index</h1>
+<h1>Empleados</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@*<p>
+    <a asp-action="Create">Registrar</a>
+</p>*@
+
+<div class="d-flex">
+    <div class="col-md-9">
+        <a class="btn btn-outline-secondary btn-sm" href="@Url.Action("Create", "Empleados" )">Registrar</a>
+        @*@Html.ActionLink("Exportar", "ExportaExcel", null, new { @class = "btn btn-outline-primary btn-sm" })*@
+    </div>
+    <div class="col-md-3" style="margin-bottom:10px;">
+
+        <form method="get" class="d-flex">
+            <input class="form-control me-sm-2" type="text" id="term" name="term" placeholder="Buscar" />
+            <button class="btn btn-secondary my-2 my-sm-0 btn-sm" id="getTerm" type="submit">Buscar</button>
+        </form>
+
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -16,16 +32,22 @@
                 @Html.DisplayNameFor(model => model.Cedula)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.FullName)
             </th>
-            <th>
+@*            <th>
                 @Html.DisplayNameFor(model => model.Apellido)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SalarioMensual)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioCreacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsActivo)
@@ -46,10 +68,13 @@
                 @Html.DisplayFor(modelItem => item.Cedula)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Apellido)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SalarioMensual)
@@ -58,18 +83,21 @@
                 @Html.DisplayFor(modelItem => item.FechaRegistro)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.UsuarioCreacion)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IsActivo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdDepartamentoNavigation.IdDepartamento)
+                @Html.DisplayFor(modelItem => item.IdDepartamentoNavigation.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPuestoNavigation.IdPuesto)
+                @Html.DisplayFor(modelItem => item.IdPuestoNavigation.Nombre)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdEmpleado">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdEmpleado">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdEmpleado">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdEmpleado">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdEmpleado">Ver</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEmpleado">Borrar</a>
             </td>
         </tr>
 }

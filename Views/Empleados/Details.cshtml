@@ -1,13 +1,12 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Empleado
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Ver Empleado";
 }
 
-<h1>Details</h1>
+<h1>Ver Empleado</h1>
 
 <div>
-    <h4>Empleado</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -29,6 +28,12 @@
             @Html.DisplayFor(model => model.Apellido)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.SalarioMensual)
         </dt>
         <dd class = "col-sm-10">
@@ -41,6 +46,12 @@
             @Html.DisplayFor(model => model.FechaRegistro)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsActivo)
         </dt>
         <dd class = "col-sm-10">
@@ -50,17 +61,17 @@
             @Html.DisplayNameFor(model => model.IdDepartamentoNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDepartamentoNavigation.IdDepartamento)
+            @Html.DisplayFor(model => model.IdDepartamentoNavigation.Nombre)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdPuestoNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPuestoNavigation.IdPuesto)
+            @Html.DisplayFor(model => model.IdPuestoNavigation.Nombre)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdEmpleado">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdEmpleado">Editar</a> |
+    <a asp-action="Index">Volver</a>
 </div>
