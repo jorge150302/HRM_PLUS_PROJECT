@@ -4,9 +4,8 @@
     ViewData["Title"] = "Editar Tipo de Transacción";
 }
 
-<h1>Editar</h1>
+<h1>Editar Tipo de Transacción</h1>
 
-<h4>Tipo de Transacción</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,20 +22,20 @@
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IsActivo" class="control-label"></label>
-                <input asp-for="IsActivo" class="form-control" />
-                <span asp-validation-for="IsActivo" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActivo" /> Activo
+                </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Actualizar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+    <a asp-action="Index">Volver</a>
 </div>
 
 @section Scripts {

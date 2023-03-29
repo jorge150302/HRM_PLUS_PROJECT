@@ -4,9 +4,8 @@
     ViewData["Title"] = "Editar Tipo de Deducción";
 }
 
-<h1>Editar</h1>
+<h1>Editar Tipo de Deducción</h1>
 
-<h4>Tipo de Deducción</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,7 +29,7 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsTodoEmpleado" /> @Html.DisplayNameFor(model => model.IsTodoEmpleado)
+                    <input class="form-check-input" asp-for="IsTodoEmpleado" /> Todos los Empleados
                 </label>
             </div>
             <div class="form-group">
@@ -43,20 +42,20 @@
                 <input asp-for="MaximoRango" class="form-control" />
                 <span asp-validation-for="MaximoRango" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IsActivo" class="control-label"></label>
-                <input asp-for="IsActivo" class="form-control" />
-                <span asp-validation-for="IsActivo" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActivo" /> Activo
+                </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Actualizar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+    <a asp-action="Index">Volver</a>
 </div>
 
 @section Scripts {

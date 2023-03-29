@@ -19,11 +19,17 @@ namespace HRM_PLUS_PROJECT.Controllers
         }
 
         // GET: TiposTransacciones
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string term = null)
         {
-              return _context.TipoTransaccions != null ? 
-                          View(await _context.TipoTransaccions.ToListAsync()) :
-                          Problem("Entity set 'HRMPlusContext.TipoTransaccions'  is null.");
+            var hRMPlusContext = from h in _context.TipoTransaccions select h;
+            //return View(await hRMPlusContext.ToListAsync());
+
+            return View(await hRMPlusContext.Where(x => term == null ||
+                                            x.IdTipoTransaccion.ToString().StartsWith(term)
+                                            || x.Nombre.Contains(term)
+                                            || x.Descripcion.Contains(term)
+                                            || x.IsActivo.ToString().Contains(term)).ToListAsync());
         }
 
         // GET: TiposTransacciones/Details/5

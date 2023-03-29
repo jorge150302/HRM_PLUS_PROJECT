@@ -1,12 +1,11 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Puesto
 
 @{
-    ViewData["Title"] = "Agregar Puesto";
+    ViewData["Title"] = "Registrar Puesto";
 }
 
-<h1>Agregar</h1>
+<h1>Registrar Puesto</h1>
 
-<h4>Puesto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,7 +23,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="NivelRiesgo" class="control-label"></label>
-                <input asp-for="NivelRiesgo" class="form-control" />
+                <select asp-for="NivelRiesgo" class="form-select" >
+                    <option value="Alto">Alto</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Bajo">Bajo</option>
+                </select>
                 <span asp-validation-for="NivelRiesgo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -43,14 +46,14 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Agregar" class="btn btn-primary" />
+                <input type="submit" value="Registrar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+    <a asp-action="Index">Volver</a>
 
 </div>
 

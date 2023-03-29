@@ -19,11 +19,21 @@ namespace HRM_PLUS_PROJECT.Controllers
         }
 
         // GET: TiposDeducciones
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string term = null)
         {
-              return _context.TipoDeduccions != null ? 
-                          View(await _context.TipoDeduccions.ToListAsync()) :
-                          Problem("Entity set 'HRMPlusContext.TipoDeduccions'  is null.");
+            var hRMPlusContext = from h in _context.TipoDeduccions select h;
+            //return View(await hRMPlusContext.ToListAsync());
+
+            return View(await hRMPlusContext.Where(x => term == null ||
+                                            x.IdDeduccion.ToString().StartsWith(term)
+                                            || x.Nombre.Contains(term)
+                                            || x.Descripcion.Contains(term)
+                                            || x.Monto.ToString().Contains(term)
+                                            || x.IsTodoEmpleado.ToString().Contains(term)
+                                            || x.MinimoRango.ToString().Contains(term)
+                                            || x.MaximoRango.ToString().Contains(term)
+                                            || x.IsActivo.ToString().Contains(term)).ToListAsync());
         }
 
         // GET: TiposDeducciones/Details/5

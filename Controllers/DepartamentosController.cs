@@ -19,11 +19,17 @@ namespace HRM_PLUS_PROJECT.Controllers
         }
 
         // GET: Departamentos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string term = null)
         {
-              return _context.Departamentos != null ? 
-                          View(await _context.Departamentos.ToListAsync()) :
-                          Problem("Entity set 'HRMPlusContext.Departamentos'  is null.");
+            var hRMPlusContext = from h in _context.Departamentos select h;
+            //return View(await hRMPlusContext.ToListAsync());
+
+            return View(await hRMPlusContext.Where(x => term == null ||
+                                            x.IdDepartamento.ToString().StartsWith(term)
+                                            || x.Nombre.Contains(term)
+                                            || x.Descripcion.Contains(term)
+                                            || x.UbicacionFisica.Contains(term)
+                                            || x.IsActivo.ToString().Contains(term)).ToListAsync());
         }
 
         // GET: Departamentos/Details/5

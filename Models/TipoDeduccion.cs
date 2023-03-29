@@ -17,7 +17,7 @@ namespace HRM_PLUS_PROJECT.Models
         public bool IsTodoEmpleado { get; set; }
         public decimal? MinimoRango { get; set; }
         public decimal? MaximoRango { get; set; }
-        public bool? IsActivo { get; set; }
+        public bool IsActivo { get; set; }
 
         public virtual ICollection<Nomina> Nominas { get; set; }
     }

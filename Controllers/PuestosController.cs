@@ -19,11 +19,19 @@ namespace HRM_PLUS_PROJECT.Controllers
         }
 
         // GET: Puestos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string term = null)
         {
-              return _context.Puestos != null ? 
-                          View(await _context.Puestos.ToListAsync()) :
-                          Problem("Entity set 'HRMPlusContext.Puestos'  is null.");
+            var hRMPlusContext = from h in _context.Puestos select h;
+            //return View(await hRMPlusContext.ToListAsync());
+
+            return View(await hRMPlusContext.Where(x => term == null ||
+                                            x.IdPuesto.ToString().StartsWith(term)
+                                            || x.Nombre.Contains(term)
+                                            || x.Descripcion.Contains(term)
+                                            || x.NivelRiesgo.Contains(term)
+                                            || x.SalarioMinimo.ToString().Contains(term)
+                                            || x.SalarioMaximo.ToString().Contains(term)
+                                            || x.IsActivo.ToString().Contains(term)).ToListAsync());
         }
 
         // GET: Puestos/Details/5

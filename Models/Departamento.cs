@@ -14,7 +14,7 @@ namespace HRM_PLUS_PROJECT.Models
         public string Nombre { get; set; } = null!;
         public string Descripcion { get; set; } = null!;
         public string UbicacionFisica { get; set; } = null!;
-        public bool? IsActivo { get; set; }
+        public bool IsActivo { get; set; }
 
         public virtual ICollection<Empleado> Empleados { get; set; }
     }

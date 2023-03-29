@@ -1,14 +1,11 @@
 ﻿@model HRM_PLUS_PROJECT.Models.TipoDeduccion
 
 @{
-    ViewData["Title"] = "Borrar Tipo de Deducción";
+    ViewData["Title"] = "Eliminar Tipo de Deducción";
 }
 
-<h1>Borrar</h1>
-
-<h3>¿Seguro que quiere borrar esto?</h3>
+<h3>¿Seguro que desea eliminar este registro?</h3>
 <div>
-    <h4>Tipo de Deducción</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -57,8 +54,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdDeduccion" />
-        <input type="submit" value="Borrar" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
 
     </form>
 </div>

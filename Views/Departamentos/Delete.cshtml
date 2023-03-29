@@ -1,14 +1,12 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Departamento
 
 @{
-    ViewData["Title"] = "Borrar Departamento";
+    ViewData["Title"] = "Eliminar Departamento";
 }
 
-<h1>Borrar</h1>
 
-<h3>¿Seguro que quiere borrar esto?</h3>
+<h3>¿Seguro que desea eliminar este registro?</h3>
 <div>
-    <h4>Departamento</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -39,8 +37,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdDepartamento" />
-        <input type="submit" value="Borrar" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
 
     </form>
 </div>

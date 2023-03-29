@@ -1,14 +1,11 @@
 ﻿@model HRM_PLUS_PROJECT.Models.TipoTransaccion
 
 @{
-    ViewData["Title"] = "Borrar Tipo de Transacción";
+    ViewData["Title"] = "Eliminar Tipo de Transacción";
 }
 
-<h1>Borrar</h1>
-
-<h3>¿Seguro que quiere borrar esto?</h3>
+<h3>¿Seguro que desea eliminar este registro?</h3>
 <div>
-    <h4>Tipo de Transacción</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -33,8 +30,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdTipoTransaccion" />
-        <input type="submit" value="Borrar" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
 
     </form>
 </div>
