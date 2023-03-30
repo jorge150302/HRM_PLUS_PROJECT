@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\HRM_PLUS_PROJECT.props" />
+</Project>
