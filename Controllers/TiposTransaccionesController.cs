@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
+    
     public class TiposTransaccionesController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -49,13 +52,13 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(tipoTransaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: TiposTransacciones/Create
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: TiposTransacciones/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -71,7 +74,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             return View(tipoTransaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: TiposTransacciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -87,7 +90,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             return View(tipoTransaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: TiposTransacciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -122,7 +125,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             return View(tipoTransaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: TiposTransacciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -140,7 +143,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(tipoTransaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: TiposTransacciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

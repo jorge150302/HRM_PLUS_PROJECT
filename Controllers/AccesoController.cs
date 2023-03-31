@@ -29,24 +29,22 @@ namespace HRM_PLUS_PROJECT.Controllers
             if (usuario != null)
             {
 
-                //2.- CONFIGURACION DE LA AUTENTICACION
-                #region AUTENTICACTION
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, usuario.Nombre),
-                    new Claim("Correo", usuario.Correo),
+                    new Claim("Correo", usuario.Correo) 
                 };
-                foreach (string rol in usuario.Roles)
-                {
+
+                foreach (string rol in usuario.Roles){
                     claims.Add(new Claim(ClaimTypes.Role, rol));
+
                 }
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                #endregion
 
-
-                return RedirectToAction("Index", "Puestos");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -58,9 +56,8 @@ namespace HRM_PLUS_PROJECT.Controllers
         public async Task<IActionResult> Salir()
         {
             //3.- CONFIGURACION DE LA AUTENTICACION
-            #region AUTENTICACTION
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            #endregion
+           
 
             return RedirectToAction("Index");
 

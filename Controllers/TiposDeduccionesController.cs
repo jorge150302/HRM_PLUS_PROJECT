@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
+    [Authorize(Roles = "Administrador,Supervisor,Empleado,Jefe")]
     public class TiposDeduccionesController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -53,7 +56,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(tipoDeduccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: TiposDeducciones/Create
         public IActionResult Create()
         {
@@ -75,7 +78,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             return View(tipoDeduccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: TiposDeducciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -91,7 +94,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             return View(tipoDeduccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: TiposDeducciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -126,7 +129,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             return View(tipoDeduccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: TiposDeducciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -144,7 +147,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(tipoDeduccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: TiposDeducciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
+    [Authorize(Roles = "Administrador,Supervisor,Empleado,Jefe")]
     public class NominasController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -24,7 +27,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             var hRMPlusContext = _context.Nominas.Include(n => n.IdDeduccionNavigation).Include(n => n.IdEmpleadoNavigation).Include(n => n.IdTransaccionNavigation);
             return View(await hRMPlusContext.ToListAsync());
         }
-
+        
         // GET: Nominas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,7 +48,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(nomina);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Nominas/Create
         public IActionResult Create()
         {
@@ -54,7 +57,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTransaccion"] = new SelectList(_context.Transaccions, "IdTransaccion", "IdTransaccion");
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Nominas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -73,7 +76,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTransaccion"] = new SelectList(_context.Transaccions, "IdTransaccion", "IdTransaccion", nomina.IdTransaccion);
             return View(nomina);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Nominas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -92,7 +95,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTransaccion"] = new SelectList(_context.Transaccions, "IdTransaccion", "IdTransaccion", nomina.IdTransaccion);
             return View(nomina);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Nominas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -130,7 +133,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTransaccion"] = new SelectList(_context.Transaccions, "IdTransaccion", "IdTransaccion", nomina.IdTransaccion);
             return View(nomina);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Nominas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -151,7 +154,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(nomina);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Nominas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

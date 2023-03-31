@@ -23,29 +23,30 @@ namespace HRM_PLUS_PROJECT.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Administrador,Empleado")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Nominas()
         {
-            return View();
+         
+            return View("Index", "Nomina");
         }
 
-        [Authorize(Roles = "Administrador,Supervisor")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Puestos()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrador,Supervisor")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult TiposDeduccion()
         {
             return View();
         }
-        [Authorize(Roles = "Administrador,Supervisor")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult TiposTransaccion()
         {
             return View();
         }
-        [Authorize(Roles = "Administrador,Supervisor")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Transsaccion()
         {
             return View();

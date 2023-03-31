@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
+    [Authorize(Roles = "Administrador,Supervisor,Empleado,Jefe")]
     public class EmpleadosController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -54,7 +57,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(empleado);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Empleado/Create
         public IActionResult Create()
         {
@@ -62,7 +65,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdPuesto"] = new SelectList(_context.Puestos.Where(x => x.IsActivo == true), "IdPuesto", "Nombre");
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Empleado/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -100,7 +103,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", "Nombre");
             return View(empleado);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Empleado/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -119,7 +122,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdPuesto"] = new SelectList(_context.Puestos.Where(x => x.IsActivo == true), "IdPuesto", "Nombre");
             return View(empleado);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Empleado/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -176,7 +179,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", "Nombre");
             return View(empleado);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Empleado/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -196,7 +199,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(empleado);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Empleado/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
