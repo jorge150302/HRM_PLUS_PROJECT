@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using HRM_PLUS_PROJECT.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
@@ -15,6 +16,7 @@ namespace HRM_PLUS_PROJECT.Controllers
     public class EmpleadosController : Controller
     {
         private readonly HRMPlusContext _context;
+        DA_Usuario _da_usuario = new DA_Usuario();
 
         public EmpleadosController(HRMPlusContext context)
         {
