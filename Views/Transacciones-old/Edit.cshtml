@@ -4,9 +4,9 @@
     ViewData["Title"] = "Editar Transacción";
 }
 
-<h1>Editar Transacción</h1>
+<h1>Editar</h1>
 
-
+<h4>Transacción</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,21 +24,25 @@
                 <span asp-validation-for="IdTipoTransaccion" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="FechaRegistro" class="control-label"></label>
+                <input asp-for="FechaRegistro" class="form-control" />
+                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Monto" class="control-label"></label>
                 <input asp-for="Monto" class="form-control" type="number"/>
                 <span asp-validation-for="Monto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <br />
-                <input type="submit" value="Actualizar" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
-            @Html.HiddenFor(model => model.UsuarioCreacion)
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Volver</a>
+    <a asp-action="Index" class="btn btn-secondary">Regresar a la lista</a>
+
 </div>
 
 @section Scripts {

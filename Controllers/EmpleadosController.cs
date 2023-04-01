@@ -101,8 +101,8 @@ namespace HRM_PLUS_PROJECT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento", "Nombre");
-            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", "Nombre");
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "Nombre");
+            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "Nombre");
             return View(empleado);
         }
         [Authorize(Roles = "Administrador")]
@@ -177,8 +177,8 @@ namespace HRM_PLUS_PROJECT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "IdDepartamento", "Nombre");
-            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "IdPuesto", "Nombre");
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento",  "Nombre");
+            ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "Nombre");
             return View(empleado);
         }
         [Authorize(Roles = "Administrador")]

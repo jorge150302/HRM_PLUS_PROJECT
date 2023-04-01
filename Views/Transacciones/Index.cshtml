@@ -1,51 +1,71 @@
 ﻿@model IEnumerable<HRM_PLUS_PROJECT.Models.Transaccion>
 
 @{
-    ViewData["Title"] = "Transaccíones";
+    ViewData["Title"] = "Transacciones";
 }
 
 <h1>Transacciones</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-sm btn-outline-primary btn-rounded">Agregar</a>
-</p>
+@*<p>
+    <a asp-action="Create">Registrar</a>
+</p>*@
+
+<div class="d-flex">
+    <div class="col-md-9">
+        <a class="btn btn-outline-secondary btn-sm" href="@Url.Action("Create", "Transacciones" )">Registrar</a>
+        @*@Html.ActionLink("Exportar", "ExportaExcel", null, new { @class = "btn btn-outline-primary btn-sm" })*@
+    </div>
+    <div class="col-md-3" style="margin-bottom:10px;">
+
+        <form method="get" class="d-flex">
+            <input class="form-control me-sm-2" type="text" id="term" name="term" placeholder="Buscar" />
+            <button class="btn btn-secondary my-2 my-sm-0 btn-sm" id="getTerm" type="submit">Buscar</button>
+        </form>
+
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
+                @Html.DisplayName("Empleado")
+            </th>
+             <th>
+                @Html.DisplayName("Tipo Transacción")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Monto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdEmpleadoNavigation)
+                @Html.DisplayNameFor(model => model.FechaRegistro)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTipoTransaccionNavigation)
-            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.UsuarioCreacion)
+            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.IdEmpleadoNavigation.FullName)
+            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
+                @Html.DisplayFor(modelItem => item.IdTipoTransaccionNavigation.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Monto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdEmpleadoNavigation.IdEmpleado)
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
             </td>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.IdTipoTransaccionNavigation.IdTipoTransaccion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdTransaccion" class="btn btn-sm btn-success">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdTransaccion" class="btn btn-sm btn-primary">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdTransaccion" class="btn btn-sm btn-danger">Borrar</a>
+                <a asp-action="Edit" asp-route-id="@item.IdTransaccion">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdTransaccion">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdTransaccion">Borrar</a>
             </td>
         </tr>
 }

@@ -4,6 +4,7 @@ using HRM_PLUS_PROJECT.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRM_PLUS_PROJECT.Migrations
 {
     [DbContext(typeof(HRMPlusContext))]
-    partial class HRMPlusContextModelSnapshot : ModelSnapshot
+    [Migration("20230401001446_UsuarioCreacionTrans")]
+    partial class UsuarioCreacionTrans
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

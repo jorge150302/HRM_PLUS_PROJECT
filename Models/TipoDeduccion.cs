@@ -16,7 +16,7 @@ namespace HRM_PLUS_PROJECT.Models
         public int IdDeduccion { get; set; }
 
         [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "Debe ingresar una nombre")]
+        [Required(ErrorMessage = "Debe ingresar un nombre")]
         [StringLength(50)]
         public string Nombre { get; set; } = null!;
 

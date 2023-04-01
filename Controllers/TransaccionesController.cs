@@ -6,12 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
-using Microsoft.AspNetCore.Authorization;
-using System.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-    
     public class TransaccionesController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -22,10 +19,15 @@ namespace HRM_PLUS_PROJECT.Controllers
         }
 
         // GET: Transacciones
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string term = null)
         {
             var hRMPlusContext = _context.Transaccions.Include(t => t.IdEmpleadoNavigation).Include(t => t.IdTipoTransaccionNavigation);
-            return View(await hRMPlusContext.ToListAsync());
+            //return View(await hRMPlusContext.ToListAsync());
+            return View(await hRMPlusContext.Where(x => term == null ||
+                                            x.IdTransaccion.ToString().StartsWith(term)
+                                            || x.Monto.ToString().Contains(term)
+                                            || x.IdEmpleadoNavigation.Nombre.Contains(term)
+                                            || x.IdTipoTransaccionNavigation.Nombre.Contains(term)).ToListAsync());
         }
 
         // GET: Transacciones/Details/5
@@ -47,33 +49,36 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(transaccion);
         }
-        [Authorize(Roles = "Administrador")]
+
         // GET: Transacciones/Create
         public IActionResult Create()
         {
-            ViewData["IdEmpleado"] = new SelectList(_context.Empleados, "IdEmpleado", "IdEmpleado");
-            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions, "IdTipoTransaccion", "IdTipoTransaccion");
+            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado", "FullName");
+            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View();
         }
-        [Authorize(Roles = "Administrador")]
+
         // POST: Transacciones/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTransaccion,IdEmpleado,IdTipoTransaccion,FechaRegistro,Monto")] Transaccion transaccion)
+        public async Task<IActionResult> Create([Bind("IdTransaccion,IdEmpleado,IdTipoTransaccion,FechaRegistro,Monto,UsuarioCreacion")] Transaccion transaccion)
         {
+            transaccion.UsuarioCreacion = "Marileidy";
+            transaccion.FechaRegistro = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 _context.Add(transaccion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEmpleado"] = new SelectList(_context.Empleados, "IdEmpleado", "IdEmpleado", transaccion.IdEmpleado);
-            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions, "IdTipoTransaccion", "IdTipoTransaccion", transaccion.IdTipoTransaccion);
+            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado",  "FullName");
+            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion",  "Nombre");
             return View(transaccion);
         }
-        [Authorize(Roles = "Administrador")]
+
         // GET: Transacciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -87,17 +92,17 @@ namespace HRM_PLUS_PROJECT.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdEmpleado"] = new SelectList(_context.Empleados, "IdEmpleado", "IdEmpleado", transaccion.IdEmpleado);
-            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions, "IdTipoTransaccion", "IdTipoTransaccion", transaccion.IdTipoTransaccion);
+            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado", "FullName");
+            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View(transaccion);
         }
-        [Authorize(Roles = "Administrador")]
+
         // POST: Transacciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTransaccion,IdEmpleado,IdTipoTransaccion,FechaRegistro,Monto")] Transaccion transaccion)
+        public async Task<IActionResult> Edit(int id, [Bind("IdTransaccion,IdEmpleado,IdTipoTransaccion,FechaRegistro,Monto,UsuarioCreacion")] Transaccion transaccion)
         {
             if (id != transaccion.IdTransaccion)
             {
@@ -124,11 +129,11 @@ namespace HRM_PLUS_PROJECT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEmpleado"] = new SelectList(_context.Empleados, "IdEmpleado", "IdEmpleado", transaccion.IdEmpleado);
-            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions, "IdTipoTransaccion", "IdTipoTransaccion", transaccion.IdTipoTransaccion);
+            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado",  "FullName");
+            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View(transaccion);
         }
-        [Authorize(Roles = "Administrador")]
+
         // GET: Transacciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -148,7 +153,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(transaccion);
         }
-        [Authorize(Roles = "Administrador")]
+
         // POST: Transacciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
