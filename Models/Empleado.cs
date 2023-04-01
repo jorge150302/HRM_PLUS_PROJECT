@@ -19,11 +19,15 @@ namespace HRM_PLUS_PROJECT.Models
         public int IdEmpleado { get; set; }
         [Display(Name = "Cédula")]
         [StringLength(11, ErrorMessage = "Minimo permitido de 11 carácteres", MinimumLength = 11)]
+        [Required(ErrorMessage = "Cédula es obligatorio")]
         public string Cedula { get; set; } = null!;
+        [Required(ErrorMessage = "Nombre es obligatorio")]
         public string Nombre { get; set; } = null!;
+        [Required(ErrorMessage = "Apellido es obligatorio")]
+        [Display(Name = "Apellidos")]
         public string Apellido { get; set; } = null!;
-        //[Required]
         [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "Teléfono es obligatorio")]
         [StringLength(10, ErrorMessage = "Minimo permitido de 10 carácteres", MinimumLength = 10)]
         public string Telefono { get; set; } = null!;
         [Display(Name = "Departamento")]
@@ -31,12 +35,14 @@ namespace HRM_PLUS_PROJECT.Models
         [Display(Name = "Puesto")]
         public int IdPuesto { get; set; }
         [Display(Name = "Salario Mensual")]
+        [Required(ErrorMessage = "Salario Mensual es obligatorio")]
+        [Range(1, 9999999, ErrorMessage = "Ingresar un monto entre 1 y 9999999")]
         public decimal SalarioMensual { get; set; }
         [Display(Name = "Fecha Registro")]
         public DateTime? FechaRegistro { get; set; }
         [Display(Name = "Usuario Creación")]
         public string? UsuarioCreacion { get; set; }
-        [Display(Name = "Activo?")]
+        [Display(Name = "Estado")]
         public bool IsActivo { get; set; }
 
         [Display(Name = "Departamento")]
