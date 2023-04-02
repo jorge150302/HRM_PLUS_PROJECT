@@ -218,11 +218,9 @@ namespace HRM_PLUS_PROJECT.Migrations
                         .HasColumnName("isTodoEmpleado");
 
                     b.Property<decimal?>("MaximoRango")
-                        .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("MinimoRango")
-                        .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Monto")

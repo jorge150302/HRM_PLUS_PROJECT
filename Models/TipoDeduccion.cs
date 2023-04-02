@@ -33,11 +33,11 @@ namespace HRM_PLUS_PROJECT.Models
         [Display(Name = "¿Son todos los empleados?")]
         public bool IsTodoEmpleado { get; set; }
 
-        [Display(Name = "Mínimo de rango")]
+        [Display(Name = "Salario mínimo de rango")]
         [Range(1, 9999999, ErrorMessage = "Ingresar un monto entre 1 y 9999999")]
         public decimal? MinimoRango { get; set; }
 
-        [Display(Name = "Máximo de rango")]
+        [Display(Name = "Salario máximo de rango")]
         [Range(1, 9999999, ErrorMessage = "Ingresar un monto entre 1 y 9999999")]
         [Cantidad1NoMayorQueCantidad2]
         public decimal? MaximoRango { get; set; }
