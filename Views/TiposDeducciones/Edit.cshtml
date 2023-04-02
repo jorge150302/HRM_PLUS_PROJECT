@@ -29,7 +29,7 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsTodoEmpleado" /> Todos los Empleados
+                    <input id="IsTodoEmpleado" class="form-check-input" asp-for="IsTodoEmpleado" /> Todos los Empleados
                 </label>
             </div>
             <div class="form-group">
@@ -37,10 +37,12 @@
                 <input asp-for="MinimoRango" class="form-control" type="number"/>
                 <span asp-validation-for="MinimoRango" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="MaximoRango" class="control-label"></label>
                 <input asp-for="MaximoRango" class="form-control" type="number"/>
-                <span asp-validation-for="MaximoRango" class="text-danger"></span>
+                <span asp-validation-for="MaximoRango" class="text-danger" style="display:block;"></span>
+                <span id="errorMaximoRango" class="text-danger" style="display:block;"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -48,7 +50,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Actualizar" class="btn btn-primary" />
+                <input id="btnGuardar" type="submit" value="Actualizar" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -60,4 +62,55 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  <script>
+$(document).ready(function() {
+  const checkbox = $("#IsTodoEmpleado");
+  const formGroup5 = $("div.form-group:nth-of-type(5)");
+  const formGroup6 = $("div.form-group:nth-of-type(6)");
+  const btnGuardar = $("#btnGuardar");
+
+  // Oculta los elementos del formulario si el checkbox está seleccionado y limpia los campos
+  if (checkbox.is(":checked")) {
+    formGroup5.hide();
+    formGroup6.hide();
+    formGroup5.find('input, textarea, select').val('');
+    formGroup6.find('input, textarea, select').val('');
+  }
+
+  // Agrega un listener al checkbox para ocultar o mostrar los elementos del formulario y limpiar los campos
+  checkbox.on("change", function() {
+    if($(this).is(":checked")) {
+      formGroup5.hide();
+      formGroup6.hide();
+      formGroup5.find('input, textarea, select').val('');
+      formGroup6.find('input, textarea, select').val('');
+    } else {
+      formGroup5.show();
+      formGroup6.show();
+    }
+  });
+
+  btnGuardar.on("click", function() {
+  const campo5 = formGroup5.find('input, textarea, select');
+  const campo6 = formGroup6.find('input, textarea, select');
+  let camposObligatoriosCompletos = true;
+
+  if(!checkbox.is(":checked")) {
+    if(campo5.val() === '' || campo6.val() === '') {
+      camposObligatoriosCompletos = false;
+    }
+  }
+
+  if(!camposObligatoriosCompletos) {
+    $('#errorMaximoRango').text('El campo de mínimo y máximo de rango son obligatorios');
+  return false;
+  }
+
+  // Agrega aquí el código para guardar el formulario si los campos requeridos están completos
+  $('form').submit();
+});
+
+});
+</script>
+
 }
