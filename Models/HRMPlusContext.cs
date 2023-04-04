@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using HRM_PLUS_PROJECT.Models;
 
 namespace HRM_PLUS_PROJECT.Models
 {
@@ -229,5 +230,7 @@ namespace HRM_PLUS_PROJECT.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+       
     }
 }

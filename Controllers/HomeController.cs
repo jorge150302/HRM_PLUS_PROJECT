@@ -17,40 +17,12 @@ namespace HRM_PLUS_PROJECT.Controllers
             _logger = logger;
         }
 
-        [Authorize(Roles = "Administrador,Supervisor,Empleado,Jefe")]
+        
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrador")]
-        public IActionResult Nominas()
-        {
-         
-            return View("Index", "Nomina");
-        }
-
-        [Authorize(Roles = "Administrador")]
-        public IActionResult Puestos()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Administrador")]
-        public IActionResult TiposDeduccion()
-        {
-            return View();
-        }
-        [Authorize(Roles = "Administrador")]
-        public IActionResult TiposTransaccion()
-        {
-            return View();
-        }
-        [Authorize(Roles = "Administrador")]
-        public IActionResult Transsaccion()
-        {
-            return View();
-        }
 
         [AllowAnonymous]
         public IActionResult Privacy()

@@ -35,6 +35,8 @@ namespace HRM_PLUS_PROJECT.Controllers
                     new Claim("Correo", usuario.Correo) 
                 };
 
+
+
                 foreach (string rol in usuario.Roles){
                     claims.Add(new Claim(ClaimTypes.Role, rol));
 
