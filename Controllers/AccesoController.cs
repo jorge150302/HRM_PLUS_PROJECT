@@ -50,6 +50,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             else
             {
+                ViewData["Mensaje"] = "Usuario no encontrado";
                 return View();
             }
 
