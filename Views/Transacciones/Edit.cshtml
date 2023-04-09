@@ -4,43 +4,57 @@
     ViewData["Title"] = "Editar Transacción";
 }
 
-<h1>Editar Transacción</h1>
 
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Editar Transacción</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" enctype="multipart/form-data" method="post" autocomplete="off">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="IdTransaccion" />
+                        <div class="row">
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="IdEmpleado" class="control-label"></label>
+                                    <select asp-for="IdEmpleado" class="form-control" asp-items="ViewBag.IdEmpleado"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="IdTipoTransaccion" class="control-label"></label>
+                                    <select asp-for="IdTipoTransaccion" class="form-control" asp-items="ViewBag.IdTipoTransaccion"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Monto" class="control-label"></label>
+                                    <input asp-for="Monto" class="form-control" type="number" />
+                                    <span asp-validation-for="Monto" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-button">
+                            <div class="form-group">
+                                <br />
+                                <input type="submit" value="Actualizar" class="btn btn-primary" />
+                                <a class="btn btn-outline-info" href="@Url.Action("Index", "Transacciones")">Volver</a>
+                            </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdTransaccion" />
-            <div class="form-group">
-                <label asp-for="IdEmpleado" class="control-label"></label>
-                <select asp-for="IdEmpleado" class="form-control" asp-items="ViewBag.IdEmpleado"></select>
-                <span asp-validation-for="IdEmpleado" class="text-danger"></span>
+                        </div>
+                        @Html.HiddenFor(model => model.UsuarioCreacion)
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="IdTipoTransaccion" class="control-label"></label>
-                <select asp-for="IdTipoTransaccion" class="form-control" asp-items="ViewBag.IdTipoTransaccion"></select>
-                <span asp-validation-for="IdTipoTransaccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Monto" class="control-label"></label>
-                <input asp-for="Monto" class="form-control" type="number"/>
-                <span asp-validation-for="Monto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <br />
-                <input type="submit" value="Actualizar" class="btn btn-primary" />
-            </div>
-            @Html.HiddenFor(model => model.UsuarioCreacion)
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Volver</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
