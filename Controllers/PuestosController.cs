@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
@@ -168,6 +169,49 @@ namespace HRM_PLUS_PROJECT.Controllers
         private bool PuestoExists(int id)
         {
           return (_context.Puestos?.Any(e => e.IdPuesto == id)).GetValueOrDefault();
+        }
+
+        //Excel
+
+        public IActionResult ExportaExcel(string term)
+        {
+            var query = from p in _context.Puestos
+                        where string.IsNullOrEmpty(term) || p.Nombre.Contains(term)
+                        select p;
+
+            var puestos = query.ToList();
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Puestos");
+
+                // Agregar encabezados de columna
+                worksheet.Cells[1, 1].Value = "Nombre";
+                worksheet.Cells[1, 2].Value = "Descripción";
+                worksheet.Cells[1, 3].Value = "Nivel de Riesgo";
+                worksheet.Cells[1, 4].Value = "Salario Mínimo";
+                worksheet.Cells[1, 5].Value = "Salario Máximo";
+                worksheet.Cells[1, 6].Value = "Activo";
+
+                // Agregar datos de fila
+                for (int i = 0; i < puestos.Count; i++)
+                {
+                    var puesto = puestos[i];
+
+                    worksheet.Cells[i + 2, 1].Value = puesto.Nombre;
+                    worksheet.Cells[i + 2, 2].Value = puesto.Descripcion;
+                    worksheet.Cells[i + 2, 3].Value = puesto.NivelRiesgo;
+                    worksheet.Cells[i + 2, 4].Value = puesto.SalarioMinimo;
+                    worksheet.Cells[i + 2, 5].Value = puesto.SalarioMaximo;
+                    worksheet.Cells[i + 2, 6].Value = puesto.IsActivo;
+                }
+
+                // Ajustar ancho de columna
+                worksheet.Cells.AutoFitColumns();
+
+                // Devolver archivo Excel como un FileResult
+                return File(package.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "puestos.xlsx");
+            }
         }
     }
 }

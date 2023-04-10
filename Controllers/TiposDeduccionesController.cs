@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
@@ -170,6 +171,44 @@ namespace HRM_PLUS_PROJECT.Controllers
         private bool TipoDeduccionExists(int id)
         {
           return (_context.TipoDeduccions?.Any(e => e.IdDeduccion == id)).GetValueOrDefault();
+        }
+
+        //Excel 
+
+        public ActionResult ExportaExcel()
+        {
+            byte[] fileContents;
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Tipos de Deducciones");
+                worksheet.Cells["A1"].Value = "Nombre";
+                worksheet.Cells["B1"].Value = "Descripción";
+                worksheet.Cells["C1"].Value = "Monto";
+                worksheet.Cells["D1"].Value = "Todo el empleado";
+                worksheet.Cells["E1"].Value = "Mínimo rango";
+                worksheet.Cells["F1"].Value = "Máximo rango";
+                worksheet.Cells["G1"].Value = "Activo";
+
+                var tiposDeducciones = _context.TipoDeduccions.ToList();
+                int row = 2;
+
+                foreach (var tipoDeduccion in tiposDeducciones)
+                {
+                    worksheet.Cells[string.Format("A{0}", row)].Value = tipoDeduccion.Nombre;
+                    worksheet.Cells[string.Format("B{0}", row)].Value = tipoDeduccion.Descripcion;
+                    worksheet.Cells[string.Format("C{0}", row)].Value = tipoDeduccion.Monto;
+                    worksheet.Cells[string.Format("D{0}", row)].Value = tipoDeduccion.IsTodoEmpleado;
+                    worksheet.Cells[string.Format("E{0}", row)].Value = tipoDeduccion.MinimoRango;
+                    worksheet.Cells[string.Format("F{0}", row)].Value = tipoDeduccion.MaximoRango;
+                    worksheet.Cells[string.Format("G{0}", row)].Value = tipoDeduccion.IsActivo;
+                    row++;
+                }
+
+                fileContents = package.GetAsByteArray();
+            }
+
+            return File(fileContents, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "TiposDeducciones.xlsx");
         }
     }
 }

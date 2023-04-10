@@ -9,6 +9,7 @@ using HRM_PLUS_PROJECT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using HRM_PLUS_PROJECT.Data;
+using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
@@ -251,5 +252,60 @@ namespace HRM_PLUS_PROJECT.Controllers
                 return false;
         }
 
+        //Excel 
+
+        public ActionResult ExportarExcel(string term)
+        {
+            var empleados = _context.Empleados.Include(e => e.IdDepartamentoNavigation).Include(e => e.IdPuestoNavigation);
+            if (!String.IsNullOrEmpty(term))
+            {
+                empleados = (Microsoft.EntityFrameworkCore.Query.IIncludableQueryable<Empleado, Puesto?>)empleados.Where(e => e.FullName.Contains(term) || e.Cedula.Contains(term));
+            }
+
+            var package = new ExcelPackage();
+            var worksheet = package.Workbook.Worksheets.Add("Empleados");
+
+            // Encabezados de columnas
+            worksheet.Cells[1, 1].Value = "Cédula";
+            worksheet.Cells[1, 2].Value = "Nombre completo";
+            worksheet.Cells[1, 3].Value = "Teléfono";
+            worksheet.Cells[1, 4].Value = "Salario mensual";
+            worksheet.Cells[1, 5].Value = "Fecha de registro";
+            worksheet.Cells[1, 6].Value = "Activo";
+            worksheet.Cells[1, 7].Value = "Departamento";
+            worksheet.Cells[1, 8].Value = "Puesto";
+
+            // Datos de empleados
+            int row = 2;
+            foreach (var empleado in empleados)
+            {
+                worksheet.Cells[row, 1].Value = empleado.Cedula;
+                worksheet.Cells[row, 2].Value = empleado.FullName;
+                worksheet.Cells[row, 3].Value = empleado.Telefono;
+                worksheet.Cells[row, 4].Value = empleado.SalarioMensual;
+                worksheet.Cells[row, 5].Value = empleado.FechaRegistro;
+                worksheet.Cells[row, 6].Value = empleado.IsActivo ? "Sí" : "No";
+                worksheet.Cells[row, 7].Value = empleado.IdDepartamentoNavigation.Nombre;
+                worksheet.Cells[row, 8].Value = empleado.IdPuestoNavigation.Nombre;
+                row++;
+            }
+
+            // Ajustar ancho de columnas
+            worksheet.Cells[1, 1, row - 1, 1].AutoFitColumns();
+            worksheet.Cells[1, 2, row - 1, 2].AutoFitColumns();
+            worksheet.Cells[1, 3, row - 1, 3].AutoFitColumns();
+            worksheet.Cells[1, 4, row - 1, 4].AutoFitColumns();
+            worksheet.Cells[1, 5, row - 1, 5].AutoFitColumns();
+            worksheet.Cells[1, 6, row - 1, 6].AutoFitColumns();
+            worksheet.Cells[1, 7, row - 1, 7].AutoFitColumns();
+            worksheet.Cells[1, 8, row - 1, 8].AutoFitColumns();
+
+            // Configurar respuesta HTTP
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var fileName = "empleados.xlsx";
+            return File(package.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            return View();
+        }
     }
 }
+       
