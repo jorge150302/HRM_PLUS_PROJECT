@@ -36,16 +36,16 @@
                 Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
             -->
             <div class="logo">
-                <a href="" class="simple-text logo-mini">
+                <a href="@Url.Action("Index", "Home")" class="simple-text logo-mini">
                     <img src="../logo.png">
                 </a>
-                <a href="" class="simple-text logo-normal">
+                <a href="@Url.Action("Index", "Home")" class="simple-text logo-normal">
                     HRM Plus
                 </a>
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="active ">
+                    <li class="active">
                         <a href="@Url.Action("Index", "Departamentos")">
                             <i class="now-ui-icons travel_istanbul"></i>
                             <p>Departamentos</p>
@@ -87,12 +87,12 @@
                             <p>Transacciones</p>
                         </a>
                     </li>
-                    <li class="active-pro">
+                  @*  <li class="active-pro">
                         <a href="./upgrade.html">
                             <i class="now-ui-icons arrows-1_cloud-download-93"></i>
                             <p>Upgrade to PRO</p>
                         </a>
-                    </li>
+                    </li>*@
                 </ul>
             </div>
         </div>

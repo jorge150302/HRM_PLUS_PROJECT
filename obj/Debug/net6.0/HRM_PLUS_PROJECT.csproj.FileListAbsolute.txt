@@ -537,3 +537,9 @@ C:\Users\erick\source\repos\HRM_PLUS_PROJECT\obj\Debug\net6.0\refint\HRM_PLUS_PR
 C:\Users\erick\source\repos\HRM_PLUS_PROJECT\obj\Debug\net6.0\HRM_PLUS_PROJECT.pdb
 C:\Users\erick\source\repos\HRM_PLUS_PROJECT\obj\Debug\net6.0\HRM_PLUS_PROJECT.genruntimeconfig.cache
 C:\Users\erick\source\repos\HRM_PLUS_PROJECT\obj\Debug\net6.0\ref\HRM_PLUS_PROJECT.dll
+C:\Users\erick\source\repos\HRM_PLUS_PROJECT\bin\Debug\net6.0\EPPlus.dll
+C:\Users\erick\source\repos\HRM_PLUS_PROJECT\bin\Debug\net6.0\EPPlus.Interfaces.dll
+C:\Users\erick\source\repos\HRM_PLUS_PROJECT\bin\Debug\net6.0\EPPlus.System.Drawing.dll
+C:\Users\erick\source\repos\HRM_PLUS_PROJECT\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\erick\source\repos\HRM_PLUS_PROJECT\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\erick\source\repos\HRM_PLUS_PROJECT\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
