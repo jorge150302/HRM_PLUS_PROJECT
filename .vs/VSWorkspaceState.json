@@ -5,7 +5,10 @@
     "\\Data",
     "\\Models",
     "\\Views",
-    "\\Views\\TiposDeducciones"
+    "\\Views\\TiposDeducciones",
+    "\\wwwroot",
+    "\\wwwroot\\lib",
+    "\\wwwroot\\lib\\css"
   ],
   "SelectedNode": "\\HRM_PLUS_PROJECT.sln",
   "PreviewInSolutionExplorer": false
