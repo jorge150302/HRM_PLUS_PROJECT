@@ -15,7 +15,6 @@
         <div class="col-md-9" style="margin-bottom:10px;">
             <a class="btn btn-outline-warning btn-sm" href="@Url.Action("Create", "TiposTransacciones" )">Registrar</a>
             <a class="btn btn-outline-primary btn-sm" href="@Url.Action("ExportaExcel", "TiposTransacciones")">Exportar a Excel</a>
-
         </div>
         <div class="col-md-3" style="margin-bottom:10px;">
             <form method="get">
@@ -45,9 +44,6 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.Descripcion)
                                     </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.IsActivo)
-                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -62,16 +58,11 @@
                                             @Html.DisplayFor(modelItem => item.Descripcion)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.IsActivo)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.IdTipoTransaccion }, new { @class = "btn btn-outline-primary btn-sm" })
-                                            @Html.ActionLink("Detalle", "Details", new { id = item.IdTipoTransaccion }, new { @class = "btn btn-outline-info btn-sm" })
-                                            @Html.ActionLink("Borrar", "Delete", new { id = item.IdTipoTransaccion }, new { @class = "btn btn-outline-danger btn-sm" })
-
+                                            <a href="./TiposTransacciones/Edit?id=@item.IdTipoTransaccion" class="btn btn-outline-primary btn-sm">Editar</a>
+                                            <a href="./TiposTransacciones/Details?id=@item.IdTipoTransaccion" class="btn btn-outline-info btn-sm">Detalle</a>
+                                            <a href="./TiposTransacciones/Delete?id=@item.IdTipoTransaccion" class="btn btn-outline-danger btn-sm">Eliminar</a>
                                         </td>
                                     </tr>
-
                                 }
                             </tbody>
                         </table>
@@ -83,5 +74,5 @@
 </div>
 
 <script type="text/javascript">
-
+    // code goes here
 </script>

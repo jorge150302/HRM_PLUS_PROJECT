@@ -1,41 +1,60 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Departamento
 
 @{
-    ViewData["Title"] = "Ver Departamento";
+ViewData["Title"] = "Ver Departamento";
 }
 
-<h1>Ver Departamento</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UbicacionFisica)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UbicacionFisica)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsActivo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsActivo)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdDepartamento">Editar</a> |
-    <a asp-action="Index">Volver</a>
-</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">Departamentos</h5>
+                    <h4 class="card-title"> Ver Departamento</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Descripcion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UbicacionFisica)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsActivo)
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.UbicacionFisica)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.IsActivo)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                         <div class="right-button">
+                        <div class="form-group">
+                            <br />
+                            <a href="./Edit?id=@Model?.IdDepartamento" class="btn btn-outline-primary">Editar</a>
+                            <a class="btn btn-outline-info" href="@Url.Action("Index", "Departamentos")">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></div>

@@ -69,10 +69,9 @@
                                             @Html.DisplayFor(modelItem => item.FechaRegistro)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.IdTransaccion }, new { @class = "btn btn-outline-primary btn-sm" })
-                                            @Html.ActionLink("Detalle", "Details", new { id = item.IdTransaccion }, new { @class = "btn btn-outline-info btn-sm" })
-                                            @Html.ActionLink("Borrar", "Delete", new { id = item.IdTransaccion }, new { @class = "btn btn-outline-danger btn-sm" })
-
+                                       <a href="./Transacciones/Edit?id=@item.IdTransaccion" class="btn btn-outline-primary btn-sm">Editar</a>
+                                       <a href="./Transacciones/Details?id=@item.IdTransaccion" class="btn btn-outline-info btn-sm">Detalle</a>
+                                       <a href="./Transacciones/Delete?id=@item.IdTransaccion" class="btn btn-outline-danger btn-sm">Delete</a>
                                         </td>
                                     </tr>
                                 }

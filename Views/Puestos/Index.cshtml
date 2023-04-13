@@ -15,7 +15,6 @@
         <div class="col-md-9" style="margin-bottom:10px;">
             <a class="btn btn-outline-warning btn-sm" href="@Url.Action("Create", "Puestos" )">Registrar</a>
             <a class="btn btn-outline-primary btn-sm" href="@Url.Action("ExportaExcel", "Puestos")">Exportar a Excel</a>
-
         </div>
         <div class="col-md-3" style="margin-bottom:10px;">
             <form method="get">
@@ -51,12 +50,6 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.SalarioMinimo)
                                     </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.SalarioMaximo)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.IsActivo)
-                                    </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -77,19 +70,12 @@
                                             @Html.DisplayFor(modelItem => item.SalarioMinimo)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.SalarioMaximo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.IsActivo)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.IdPuesto }, new { @class = "btn btn-outline-primary btn-sm" })
-                                            @Html.ActionLink("Detalle", "Details", new { id = item.IdPuesto }, new { @class = "btn btn-outline-info btn-sm" })
-                                            @Html.ActionLink("Borrar", "Delete", new { id = item.IdPuesto }, new { @class = "btn btn-outline-danger btn-sm" })
 
+                                           <a href="./Puestos/Edit?id=@item.IdPuesto" class="btn btn-outline-primary btn-sm">Editar</a>
+                                           <a href="./Puestos/Details?id=@item.IdPuesto" class="btn btn-outline-info btn-sm">Detalle</a>
+                                           <a href="./Puestos/Delete?id=@item.IdPuesto" class="btn btn-outline-danger btn-sm">Eliminar</a>
                                         </td>
                                     </tr>
-
                                 }
                             </tbody>
                         </table>
@@ -101,6 +87,5 @@
 </div>
 
 <script type="text/javascript">
-
+    // code goes here
 </script>
-

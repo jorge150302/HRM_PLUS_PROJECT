@@ -13,7 +13,7 @@
                     <h5 class="title">Editar Transacción</h5>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Edit" enctype="multipart/form-data" method="post" autocomplete="off">
+                    <form asp-action="Edit" enctype="multipart/form-data" asp-route-id="@Model.IdTransaccion" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="IdTransaccion" />
                         <div class="row">

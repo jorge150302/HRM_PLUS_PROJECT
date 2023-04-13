@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<HRM_PLUS_PROJECT.Models.Departamento>
 
 @{
-    ViewData["Title"] = "Departamentos";
+ViewData["Title"] = "Departamentos";
 }
 
 <div class="content">
@@ -15,80 +15,76 @@
         <div class="col-md-9" style="margin-bottom:10px;">
             <a class="btn btn-outline-warning btn-sm" href="@Url.Action("Create", "Departamentos" )">Registrar</a>
             <a class="btn btn-outline-primary btn-sm" href="@Url.Action("ExportaExcel", "Departamentos")">Exportar a Excel</a>
-
-        </div>
-        <div class="col-md-3" style="margin-bottom:10px;">
-            <form method="get">
-                <div class="input-group no-border">
-                    <input type="text" value="" class="form-control me-sm-2" id="term" name="term" placeholder="Buscar...">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <i class="now-ui-icons ui-1_zoom-bold"></i>
-                        </div>
+            </div>
+    <div class="col-md-3" style="margin-bottom:10px;">
+        <form method="get">
+            <div class="input-group no-border">
+                <input type="text" value="" class="form-control me-sm-2" id="term" name="term" placeholder="Buscar...">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="now-ui-icons ui-1_zoom-bold"></i>
                     </div>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title"> Listado</h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class=" text-primary">
+            </div>
+        </form>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"> Listado</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Descripcion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UbicacionFisica)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IsActivo)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
                                 <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Nombre)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Descripcion)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.UbicacionFisica)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.IsActivo)
-                                    </th>
-                                    <th></th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UbicacionFisica)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsActivo)
+                                    </td>
+                                    <td>
+                                        <a href="./Departamentos/Edit?id=@item.IdDepartamento" class="btn btn-outline-primary btn-sm">Editar</a>
+                                        <a href="./Departamentos/Details?id=@item.IdDepartamento" class="btn btn-outline-info btn-sm">Detalle</a>
+                                        <a href="./Departamentos/Delete?id=@item.IdDepartamento" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Nombre)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Descripcion)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.UbicacionFisica)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.IsActivo)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.IdDepartamento }, new { @class = "btn btn-outline-primary btn-sm" })
-                                            @Html.ActionLink("Detalle", "Details", new { id = item.IdDepartamento }, new { @class = "btn btn-outline-info btn-sm" })
-                                            @Html.ActionLink("Borrar", "Delete", new { id = item.IdDepartamento }, new { @class = "btn btn-outline-danger btn-sm" })
-
-                                        </td>
-                                    </tr>
-                        
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 
-<script type="text/javascript">
+                                        <script type="text/javascript">
 
 </script>
-

@@ -1,80 +1,100 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Empleado
 
 @{
-    ViewData["Title"] = "Eliminar Empleado";
+ViewData["Title"] = "Eliminar Empleado";
 }
 
-
-<h3>Seguro que desea eliminar este registro?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cedula)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cedula)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SalarioMensual)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SalarioMensual)
-        </dd>
-         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdDepartamentoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDepartamentoNavigation.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdPuestoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdPuestoNavigation.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioCreacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioCreacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsActivo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsActivo)
-        </dd>
-       
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdEmpleado" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver</a>
-    </form>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">Empleados</h5>
+                    <h4 class="card-title">¿Seguro que desea eliminar este registro?</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                            <th>
+                                    @Html.DisplayNameFor(model => model.Cedula)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.Apellido)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.Telefono)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.SalarioMensual)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.IdDepartamentoNavigation)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.IdPuestoNavigation)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.FechaRegistro)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.UsuarioCreacion)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.IsActivo)
+                            </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Cedula)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Apellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Telefono)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.SalarioMensual)
+                                    </td>
+                                     <td>
+                                            @Html.DisplayFor(model => model.IdDepartamentoNavigation.Nombre)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(model => model.IdPuestoNavigation.Nombre)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(model => model.FechaRegistro)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(model => model.UsuarioCreacion)
+                                    </td>
+                                    <td>
+                                            @Html.DisplayFor(model => model.IsActivo)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="right-button">
+                            <div class="form-group">
+                                <br />
+                                <form asp-action="Delete" asp-route-id="@Model.IdEmpleado" method="post">
+                                    <input type="hidden" asp-for="IdEmpleado" />
+                                    <input type="submit" value="Eliminar" class="btn btn-danger" />
+                                    <a class="btn btn-outline-info" href="@Url.Action("Index", "Empleados")">Volver</a>
+                                </form>
+                            </div>
+                             </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

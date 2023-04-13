@@ -88,14 +88,12 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.IsActivo)
                                         </td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.IdDeduccion }, new { @class = "btn btn-outline-primary btn-sm" })
-                                            @Html.ActionLink("Detalle", "Details", new { id = item.IdDeduccion }, new { @class = "btn btn-outline-info btn-sm" })
-                                            @Html.ActionLink("Borrar", "Delete", new { id = item.IdDeduccion }, new { @class = "btn btn-outline-danger btn-sm" })
-
+                                       <td>
+                                            <a href="./TiposDeducciones/Edit?id=@item.IdDeduccion" class="btn btn-outline-primary btn-sm">Editar</a>
+                                            <a href="./TiposDeducciones/Details?id=@item.IdDeduccion" class="btn btn-outline-info btn-sm">Detalle</a>
+                                            <a href="./TiposDeducciones/Delete?id=@item.IdDeduccion" class="btn btn-outline-danger btn-sm">Eliminar</a>
                                         </td>
                                     </tr>
-
                                 }
                             </tbody>
                         </table>
@@ -107,5 +105,5 @@
 </div>
 
 <script type="text/javascript">
-
+    // code goes here
 </script>
