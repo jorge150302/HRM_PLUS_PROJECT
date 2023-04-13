@@ -1,48 +1,66 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Usuario
 
 @{
-    ViewData["Title"] = "Create";
+ViewData["Title"] = "Crear Usuario";
 }
 
-<h1>Create</h1>
-
-<h4>Usuario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Crear Usuario</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Nombre" class="control-label"></label>
+                                    <input asp-for="Nombre" class="form-control" />
+                                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Correo" class="control-label"></label>
+                                    <input asp-for="Correo" class="form-control" />
+                                    <span asp-validation-for="Correo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Clave" class="control-label"></label>
+                                    <input asp-for="Clave" class="form-control" />
+                                    <span asp-validation-for="Clave" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Roles" class="control-label"></label>
+                                    <select asp-for="Roles" class="form-control">
+                                        <option value="Administrador">Administrador</option>
+                                        <option value="Basico">Basico</option>  
+                                    </select>
+                                    <span asp-validation-for="Roles" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-button">
+                            <div class="form-group">
+                                <input type="submit" value="Crear" class="btn btn-primary" />
+                                <a class="btn btn-outline-info" asp-action="Index">Volver</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Clave" class="control-label"></label>
-                <input asp-for="Clave" class="form-control" />
-                <span asp-validation-for="Clave" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Roles" class="control-label"></label>
-                <input asp-for="Roles" class="form-control" />
-                <span asp-validation-for="Roles" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

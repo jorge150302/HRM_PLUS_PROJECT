@@ -1,49 +1,73 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Usuario
 
 @{
-    ViewData["Title"] = "Edit";
+ViewData["Title"] = "Editar Usuario";
 }
 
-<h1>Edit</h1>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Editar Usuario</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" enctype="multipart/form-data" asp-route-id="@Model.IdUsuario" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="IdUsuario" />
+                        <div class="row">
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Nombre" class="control-label"></label>
+                                    <input asp-for="Nombre" class="form-control" />
+                                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Correo" class="control-label"></label>
+                                    <input asp-for="Correo" class="form-control" />
+                                    <span asp-validation-for="Correo" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Clave" class="control-label"></label>
+                                    <input asp-for="Clave" class="form-control" />
+                                    <span asp-validation-for="Clave" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Roles" class="control-label"></label>
+                                    <select asp-for="Roles" class="form-control">
+                                        <option value="Administrador">Administrador</option>
+                                        <option value="Basico">Basico</option>  
+                                    </select>
+                                    <span asp-validation-for="Roles" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-button">
+                            <div class="form-group">
+                                <br />
+                                <input type="submit" value="Actualizar" class="btn btn-primary" />
+                                <a class="btn btn-outline-info" href="@Url.Action("Index", "Usuarios")">Volver</a>
+                            </div>
 
-<h4>Usuario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdUsuario" />
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Clave" class="control-label"></label>
-                <input asp-for="Clave" class="form-control" />
-                <span asp-validation-for="Clave" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Roles" class="control-label"></label>
-                <input asp-for="Roles" class="form-control" />
-                <span asp-validation-for="Roles" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ 
+    }}

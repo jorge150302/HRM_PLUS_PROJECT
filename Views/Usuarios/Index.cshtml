@@ -1,53 +1,85 @@
 ﻿@model IEnumerable<HRM_PLUS_PROJECT.Models.Usuario>
 
 @{
-    ViewData["Title"] = "Index";
+ViewData["Title"] = "Usuarios";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Correo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Clave)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Roles)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Clave)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Roles)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUsuario">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUsuario">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUsuario">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12" style="color:white">
+            <ol class="breadcrumb" style="margin-bottom:10px;">
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Inicio</a></li>
+                <li class="breadcrumb-item active">Usuarios</li>
+            </ol>
+        </div>
+        <div class="col-md-9" style="margin-bottom:10px;">
+            <a class="btn btn-outline-primary btn-sm" asp-action="Create">Crear Nuevo</a>
+        </div>
+        <div class="col-md-3" style="margin-bottom:10px;">
+            <form method="get">
+              <div class="input-group no-border">
+                <input type="text" value="" class="form-control me-sm-2" id="term" name="term" placeholder="Buscar...">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Listado</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Correo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Clave)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Roles)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Correo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Clave)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Roles)
+                                        </td>
+                                        <td>
+                                       <a href="/Usuarios/Edit?id=@item.IdUsuario" class="btn btn-outline-primary btn-sm">Editar</a>
+                                       <a href="/Usuarios/Details?id=@item.IdUsuario" class="btn btn-outline-info btn-sm">Detalle</a>
+                                       <a href="/Usuarios/Delete?id=@item.IdUsuario" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
