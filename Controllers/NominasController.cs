@@ -11,7 +11,7 @@ using System.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-    [Authorize(Roles = "Administrador,Supervisor,Empleado,Jefe")]
+    
     public class NominasController : Controller
     {
         private readonly HRMPlusContext _context;

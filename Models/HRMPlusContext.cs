@@ -24,15 +24,16 @@ namespace HRM_PLUS_PROJECT.Models
         public virtual DbSet<TipoDeduccion> TipoDeduccions { get; set; } = null!;
         public virtual DbSet<TipoTransaccion> TipoTransaccions { get; set; } = null!;
         public virtual DbSet<Transaccion> Transaccions { get; set; } = null!;
+        public virtual DbSet<Usuario> Usuarios { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=HRMPlus;Integrated Security=True;");
-//            }
-//        }
+        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //        {
+        //            if (!optionsBuilder.IsConfigured)
+        //            {
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        //                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=HRMPlus;Integrated Security=True;");
+        //            }
+        //        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -230,6 +231,8 @@ namespace HRM_PLUS_PROJECT.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<HRM_PLUS_PROJECT.Models.Usuario>? Usuario { get; set; }
 
        
     }

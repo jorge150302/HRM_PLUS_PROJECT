@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
@@ -49,7 +51,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(transaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Transacciones/Create
         public IActionResult Create()
         {

@@ -87,9 +87,9 @@ ViewData["Title"] = "Empleados";
                                             @Html.DisplayFor(modelItem => item.IdPuestoNavigation.Nombre)
                                         </td>
                                         <td>
-                                        <a href="./Empleados/Edit?id=@item.IdEmpleado" class="btn btn-outline-primary btn-sm">Editar</a>
-                                        <a href="./Empleados/Details?id=@item.IdEmpleado" class="btn btn-outline-info btn-sm">Detalle</a>
-                                        <a href="./Empleados/Delete?id=@item.IdEmpleado" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                        <a href="/Empleados/Edit?id=@item.IdEmpleado" class="btn btn-outline-primary btn-sm">Editar</a>
+                                        <a href="/Empleados/Details?id=@item.IdEmpleado" class="btn btn-outline-info btn-sm">Detalle</a>
+                                        <a href="/Empleados/Delete?id=@item.IdEmpleado" class="btn btn-outline-danger btn-sm">Eliminar</a>
                                     </td>
                                 </tr>
                             }

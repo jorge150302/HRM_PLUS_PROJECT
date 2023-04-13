@@ -13,7 +13,7 @@ using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-    [Authorize(Roles = "Administrador,Supervisor,Empleado,Jefe")]
+    
     public class EmpleadosController : Controller
     {
         private readonly HRMPlusContext _context;
