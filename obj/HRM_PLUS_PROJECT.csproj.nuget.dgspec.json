@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jorge\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {}
+    "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jorge\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {
+    "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jorge\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
+        "projectUniqueName": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
         "projectName": "HRM_PLUS_PROJECT",
-        "projectPath": "C:\\Users\\jorge\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
-        "packagesPath": "C:\\Users\\jorge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jorge\\source\\repos\\HRM_PLUS_PROJECT\\obj\\",
+        "projectPath": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
+        "packagesPath": "C:\\Users\\sirbo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jorge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sirbo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,7 +75,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -87,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

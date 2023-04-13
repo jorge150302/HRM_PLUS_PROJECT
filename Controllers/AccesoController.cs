@@ -50,7 +50,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
             else
             {
-                ViewData["Mensaje"] = "Usuario no encontrado";
+                ViewData["Mensaje"] = "Usuario y/o contraseña no coinciden.";
                 return View();
             }
 
