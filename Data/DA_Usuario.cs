@@ -11,10 +11,10 @@ namespace HRM_PLUS_PROJECT.Data
 
             return new List<Usuario>
             {
-                new Usuario{ Nombre ="jose", Correo = "administrador@gmail.com", Clave= "123" , Roles = new string[]{"Administrador"} },
-                new Usuario{ Nombre ="maria", Correo = "supervisor@gmail.com", Clave= "123" , Roles = new string[]{ "Empleado" } },
-                new Usuario{ Nombre ="juan", Correo = "empleado@gmail.com", Clave= "123" , Roles = new string[]{"Empleado"} },
-                new Usuario{ Nombre ="oscar", Correo = "superempleado@gmail.com", Clave= "123" , Roles = new string[]{ "Empleado"} }
+                new Usuario{ Nombre ="jose", Correo = "administrador@gmail.com", Clave= "12345678" , Roles = new string[]{"Administrador"} },
+                new Usuario{ Nombre ="maria", Correo = "supervisor@gmail.com", Clave= "12345678" , Roles = new string[]{ "Empleado" } },
+                new Usuario{ Nombre ="juan", Correo = "empleado@gmail.com", Clave= "12345678" , Roles = new string[]{"Empleado"} },
+                new Usuario{ Nombre ="oscar", Correo = "superempleado@gmail.com", Clave= "12345678" , Roles = new string[]{ "Empleado"} }
 
             };
 

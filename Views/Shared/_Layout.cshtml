@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../template/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="icon" type="image/png" href="~/LogoHRM.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
         HRM Plus
@@ -36,16 +36,16 @@
                 Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
             -->
             <div class="logo">
-                <a href="@Url.Action("Index", "Home")" class="simple-text logo-mini">
-                    <img src="../logo.png">
+                <a href="" class="simple-text logo-mini">
+                    <img src="~/LogoHRM.png">
                 </a>
-                <a href="@Url.Action("Index", "Home")" class="simple-text logo-normal">
+                <a href="" class="simple-text logo-normal">
                     HRM Plus
                 </a>
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="active">
+                    <li class="active ">
                         <a href="@Url.Action("Index", "Departamentos")">
                             <i class="now-ui-icons travel_istanbul"></i>
                             <p>Departamentos</p>
@@ -87,12 +87,7 @@
                             <p>Transacciones</p>
                         </a>
                     </li>
-                  @*  <li class="active-pro">
-                        <a href="./upgrade.html">
-                            <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-                            <p>Upgrade to PRO</p>
-                        </a>
-                    </li>*@
+                    
                 </ul>
             </div>
         </div>
@@ -116,9 +111,11 @@
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <!--
+                            BARRA DE BUSCAR 
                         <form>
                             <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <input type="text" value="" class="form-control" placeholder="Buscar..">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <i class="now-ui-icons ui-1_zoom-bold"></i>
@@ -126,8 +123,11 @@
                                 </div>
                             </div>
                         </form>
+                        -->
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                            <!--
+                                BOTTON QUE NO SE USA 
+                             <li class="nav-item">
                                 <a class="nav-link" href="#pablo">
                                     <i class="now-ui-icons media-2_sound-wave"></i>
                                     <p>
@@ -135,7 +135,10 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown">
+                            -->
+                           <!-- 
+                               DROPDOWN QUE NO SE USA 
+                               <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons location_world"></i>
                                     <p>
@@ -147,12 +150,13 @@
                                     <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
-                            </li>
+                             </li>
+                             -->
                             <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
-                                    <i class="now-ui-icons users_single-02"></i>
+                                <a class="nav-link" asp-area="" asp-controller="Acceso" asp-action="Salir">
+                                    <i class="now-ui-icons arrows-1_minimal-right"></i>
                                     <p>
-                                        <span class="d-lg-none d-md-block">Account</span>
+                                        <span class="d-lg-none d-md-block">Salir</span>
                                     </p>
                                 </a>
                             </li>
@@ -191,7 +195,7 @@
     <script src="../template/demo/demo.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Javascript method's body can be found in assets/js/demos.js
             demo.initDashboardPageCharts();
 
@@ -201,19 +205,18 @@
 </html>
 
 <style>
-    .footer{
+    .footer {
         position: absolute !important;
-        bottom:0 !important;
+        bottom: 0 !important;
     }
 
-    .table>thead>tr>th{
+    .table > thead > tr > th {
         font-weight: 400 !important;
-     }
-     
-     .right-button{
-         justify-content: flex-end !important;
-        display: flex !important;
-     }
+    }
 
+    .right-button {
+        justify-content: flex-end !important;
+        display: flex !important;
+    }
 
 </style>

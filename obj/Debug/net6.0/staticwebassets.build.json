@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JcH2GEfab9U9XiDFxvnKnPDe2ndtbL5cSqz7n1mYU9I=",
+  "Hash": "ryvHHS14iPjY7mGcwH4xJSm8B8NMQtJMVN/LlIAdg4U=",
   "Source": "HRM_PLUS_PROJECT",
   "BasePath": "_content/HRM_PLUS_PROJECT",
   "Mode": "Default",
@@ -1190,12 +1190,12 @@
       "OriginalItemSpec": "wwwroot\\logo.png"
     },
     {
-      "Identity": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\wwwroot\\LogoHRM.jpeg",
+      "Identity": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\wwwroot\\LogoHRM.png",
       "SourceId": "HRM_PLUS_PROJECT",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\wwwroot\\",
       "BasePath": "_content/HRM_PLUS_PROJECT",
-      "RelativePath": "LogoHRM.jpeg",
+      "RelativePath": "LogoHRM.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1204,7 +1204,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\LogoHRM.jpeg"
+      "OriginalItemSpec": "wwwroot\\LogoHRM.png"
     },
     {
       "Identity": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\wwwroot\\template\\css\\bootstrap.min.css",
