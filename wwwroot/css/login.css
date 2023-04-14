@@ -12,14 +12,14 @@ background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
     padding: 10px 215px;
     background-color: orangered;
 }
-@media (min-width: 768px) {
+@media (min-width: 300px) {
 .gradient-form {
-height: 100vh !important;
+min-height: 100vh !important;
 }
 }
-@media (min-width: 769px) {
-.gradient-custom-2 {
-border-top-right-radius: .3rem;
-border-bottom-right-radius: .3rem;
-}
+@media (min-width: 300px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
 }

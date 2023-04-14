@@ -213,11 +213,10 @@ namespace HRM_PLUS_PROJECT.Controllers
                 }
 
                 // Guardar el archivo y devolverlo como una descarga
-                var stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
-                string excelName = $"Departamentos_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xlsx";
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+                worksheet.Cells.AutoFitColumns();
+
+                // Devolver archivo Excel como un FileResult
+                return File(package.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "departamento.xlsx");
             }
         }
     }

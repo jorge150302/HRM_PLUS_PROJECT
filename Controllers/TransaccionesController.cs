@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using OfficeOpenXml;
+
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
@@ -76,8 +78,8 @@ namespace HRM_PLUS_PROJECT.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado",  "FullName");
-            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion",  "Nombre");
+            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado", "FullName");
+            ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View(transaccion);
         }
         [Authorize(Roles = "Administrador")]
@@ -131,7 +133,7 @@ namespace HRM_PLUS_PROJECT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado",  "FullName");
+            ViewData["IdEmpleado"] = new SelectList(_context.Empleados.Where(x => x.IsActivo == true), "IdEmpleado", "FullName");
             ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View(transaccion);
         }
@@ -170,14 +172,53 @@ namespace HRM_PLUS_PROJECT.Controllers
             {
                 _context.Transaccions.Remove(transaccion);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TransaccionExists(int id)
         {
-          return (_context.Transaccions?.Any(e => e.IdTransaccion == id)).GetValueOrDefault();
+            return (_context.Transaccions?.Any(e => e.IdTransaccion == id)).GetValueOrDefault();
+        }
+
+        public IActionResult ExportaExcel(string term)
+        {
+            var query = _context.Transaccions
+        .Include(t => t.IdEmpleadoNavigation)
+        .Include(t => t.IdTipoTransaccionNavigation)
+        .ToList();
+
+            var transacciones = query.ToList();
+
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Transacciones");
+
+                // Agregar encabezados de columna
+                worksheet.Cells[1, 1].Value = "Empleado";
+                worksheet.Cells[1, 2].Value = "Tipo Transacción";
+                worksheet.Cells[1, 3].Value = "Monto";
+                worksheet.Cells[1, 4].Value = "Fecha Registro";
+
+                // Agregar datos de fila
+                for (int i = 0; i < transacciones.Count; i++)
+                {
+                    var transaccion = transacciones[i];
+
+                    worksheet.Cells[i + 2, 1].Value = transaccion.IdEmpleadoNavigation?.FullName;
+                    worksheet.Cells[i + 2, 2].Value = transaccion.IdTipoTransaccionNavigation?.Nombre;
+                    worksheet.Cells[i + 2, 3].Value = transaccion.Monto;
+                    worksheet.Cells[i + 2, 4].Value = transaccion.FechaRegistro?.ToString("dd/MM/yyyy");
+
+                }
+
+                // Ajustar ancho de columna
+                worksheet.Cells.AutoFitColumns();
+
+                // Devolver archivo Excel como un FileResult
+                return File(package.GetAsByteArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "transacciones.xlsx");
+            }
         }
     }
 }
