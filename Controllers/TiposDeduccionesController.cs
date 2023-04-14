@@ -12,7 +12,7 @@ using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-    
+
     public class TiposDeduccionesController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -154,23 +154,31 @@ namespace HRM_PLUS_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TipoDeduccions == null)
+            try
             {
-                return Problem("Entity set 'HRMPlusContext.TipoDeduccions'  is null.");
+                if (_context.TipoDeduccions == null)
+                {
+                    return Problem("Entity set 'HRMPlusContext.TipoDeduccions'  is null.");
+                }
+                var tipoDeduccion = await _context.TipoDeduccions.FindAsync(id);
+                if (tipoDeduccion != null)
+                {
+                    _context.TipoDeduccions.Remove(tipoDeduccion);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var tipoDeduccion = await _context.TipoDeduccions.FindAsync(id);
-            if (tipoDeduccion != null)
+            catch (Exception)
             {
-                _context.TipoDeduccions.Remove(tipoDeduccion);
+                TempData["Error"] = "No se pudo eliminar el registro ya que está relacionado.";
+                return RedirectToAction("Index");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool TipoDeduccionExists(int id)
         {
-          return (_context.TipoDeduccions?.Any(e => e.IdDeduccion == id)).GetValueOrDefault();
+            return (_context.TipoDeduccions?.Any(e => e.IdDeduccion == id)).GetValueOrDefault();
         }
 
         //Excel 

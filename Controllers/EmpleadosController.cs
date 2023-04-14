@@ -13,7 +13,7 @@ using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-    
+
     public class EmpleadosController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -83,11 +83,12 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             Puesto puestos = _context.Puestos.Find(empleado.IdPuesto);
 
-            if (empleado.SalarioMensual<puestos.SalarioMinimo) {
+            if (empleado.SalarioMensual < puestos.SalarioMinimo)
+            {
                 ModelState.AddModelError("SalarioMensual", "El Salario es menor al mínimo " + puestos.SalarioMinimo);
             }
 
-            if (empleado.SalarioMensual>puestos.SalarioMaximo)
+            if (empleado.SalarioMensual > puestos.SalarioMaximo)
             {
                 ModelState.AddModelError("SalarioMensual", "El Salario es mayor al máximo " + puestos.SalarioMaximo);
             }
@@ -178,7 +179,7 @@ namespace HRM_PLUS_PROJECT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento",  "Nombre");
+            ViewData["IdDepartamento"] = new SelectList(_context.Departamentos, "IdDepartamento", "Nombre");
             ViewData["IdPuesto"] = new SelectList(_context.Puestos, "IdPuesto", "Nombre");
             return View(empleado);
         }
@@ -208,23 +209,31 @@ namespace HRM_PLUS_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Empleados == null)
+            try
             {
-                return Problem("Entity set 'HRMPlusContext.Empleados'  is null.");
+                if (_context.Empleados == null)
+                {
+                    return Problem("Entity set 'HRMPlusContext.Empleados'  is null.");
+                }
+                var empleado = await _context.Empleados.FindAsync(id);
+                if (empleado != null)
+                {
+                    _context.Empleados.Remove(empleado);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var empleado = await _context.Empleados.FindAsync(id);
-            if (empleado != null)
+            catch (Exception)
             {
-                _context.Empleados.Remove(empleado);
+                TempData["Error"] = "No se pudo eliminar el registro ya que está relacionado en otro módulo.";
+                return RedirectToAction("Index");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool EmpleadoExists(int id)
         {
-          return (_context.Empleados?.Any(e => e.IdEmpleado == id)).GetValueOrDefault();
+            return (_context.Empleados?.Any(e => e.IdEmpleado == id)).GetValueOrDefault();
         }
 
         public static bool validaCedula(string pCedula)
@@ -308,4 +317,4 @@ namespace HRM_PLUS_PROJECT.Controllers
         }
     }
 }
-       
+

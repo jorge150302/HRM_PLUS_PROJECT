@@ -37,6 +37,13 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
+                             @if (TempData["Error"] != null)
+                        {
+                        <div class="alert alert-danger" id="cerrar">
+                            @TempData["Error"]
+                            <span class="close-x" style="cursor: pointer;">x</span>
+                        </div>
+                        }
                             <thead class=" text-primary">
                                 <tr>
                                     <th>
@@ -104,6 +111,12 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    // code goes here
-</script>
+@section Scripts {
+    <script>
+       
+        document.querySelector('.close-x').addEventListener('click', function() {
+            document.querySelector('#cerrar').remove();
+        });
+    </script>
+ }
+

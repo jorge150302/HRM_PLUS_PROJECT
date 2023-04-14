@@ -12,7 +12,7 @@ using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-  
+
     public class DepartamentosController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -35,7 +35,7 @@ namespace HRM_PLUS_PROJECT.Controllers
                                             || x.UbicacionFisica.Contains(term)
                                             || x.IsActivo.ToString().Contains(term)).ToListAsync());
         }
-       
+
         // GET: Departamentos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -150,23 +150,31 @@ namespace HRM_PLUS_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Departamentos == null)
+            try
             {
-                return Problem("Entity set 'HRMPlusContext.Departamentos'  is null.");
+                if (_context.Departamentos == null)
+                {
+                    return Problem("Entity set 'HRMPlusContext.Departamentos'  is null.");
+                }
+                var departamento = await _context.Departamentos.FindAsync(id);
+                if (departamento != null)
+                {
+                    _context.Departamentos.Remove(departamento);
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var departamento = await _context.Departamentos.FindAsync(id);
-            if (departamento != null)
+            catch (Exception)
             {
-                _context.Departamentos.Remove(departamento);
+                TempData["Error"] = "No se pudo eliminar el registro ya que está relacionado a un empleado.";
+                return RedirectToAction("Index");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
+
 
         private bool DepartamentoExists(int id)
         {
-          return (_context.Departamentos?.Any(e => e.IdDepartamento == id)).GetValueOrDefault();
+            return (_context.Departamentos?.Any(e => e.IdDepartamento == id)).GetValueOrDefault();
         }
 
         //Excel

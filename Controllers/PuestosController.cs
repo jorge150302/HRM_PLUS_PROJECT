@@ -12,7 +12,7 @@ using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-    
+
     public class PuestosController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -152,23 +152,30 @@ namespace HRM_PLUS_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Puestos == null)
+            try
             {
-                return Problem("Entity set 'HRMPlusContext.Puestos'  is null.");
+                if (_context.Puestos == null)
+                {
+                    return Problem("Entity set 'HRMPlusContext.Puestos'  is null.");
+                }
+                var puesto = await _context.Puestos.FindAsync(id);
+                if (puesto != null)
+                {
+                    _context.Puestos.Remove(puesto);
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var puesto = await _context.Puestos.FindAsync(id);
-            if (puesto != null)
+            catch (Exception)
             {
-                _context.Puestos.Remove(puesto);
+                TempData["Error"] = "No se pudo eliminar el registro ya que está relacionado a un empleado.";
+                return RedirectToAction("Index");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool PuestoExists(int id)
         {
-          return (_context.Puestos?.Any(e => e.IdPuesto == id)).GetValueOrDefault();
+            return (_context.Puestos?.Any(e => e.IdPuesto == id)).GetValueOrDefault();
         }
 
         //Excel

@@ -36,6 +36,13 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
+                            @if (TempData["Error"] != null)
+                        {
+                        <div class="alert alert-danger" id="cerrar">
+                            @TempData["Error"]
+                            <span class="close-x" style="cursor: pointer;">x</span>
+                        </div>
+                        }
                             <thead class=" text-primary">
                                 <tr>
                                     <th>
@@ -49,6 +56,9 @@
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.SalarioMinimo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SalarioMaximo)
                                     </th>
                                     <th></th>
                                 </tr>
@@ -70,6 +80,9 @@
                                             @Html.DisplayFor(modelItem => item.SalarioMinimo)
                                         </td>
                                         <td>
+                                            @Html.DisplayFor(modelItem => item.SalarioMaximo)
+                                        </td>
+                                        <td>
 
                                            <a href="/Puestos/Edit?id=@item.IdPuesto" class="btn btn-outline-primary btn-sm">Editar</a>
                                            <a href="/Puestos/Details?id=@item.IdPuesto" class="btn btn-outline-info btn-sm">Detalle</a>
@@ -85,7 +98,11 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    // code goes here
-</script>
+@section Scripts {
+    <script>
+       
+        document.querySelector('.close-x').addEventListener('click', function() {
+            document.querySelector('#cerrar').remove();
+        });
+    </script>
+ }

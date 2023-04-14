@@ -12,7 +12,7 @@ using OfficeOpenXml;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
-    
+
     public class TiposTransaccionesController : Controller
     {
         private readonly HRMPlusContext _context;
@@ -130,6 +130,7 @@ namespace HRM_PLUS_PROJECT.Controllers
         // GET: TiposTransacciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+
             if (id == null || _context.TipoTransaccions == null)
             {
                 return NotFound();
@@ -150,23 +151,31 @@ namespace HRM_PLUS_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TipoTransaccions == null)
+            try
             {
-                return Problem("Entity set 'HRMPlusContext.TipoTransaccions'  is null.");
+                if (_context.TipoTransaccions == null)
+                {
+                    return Problem("Entity set 'HRMPlusContext.TipoTransaccions'  is null.");
+                }
+                var tipoTransaccion = await _context.TipoTransaccions.FindAsync(id);
+                if (tipoTransaccion != null)
+                {
+                    _context.TipoTransaccions.Remove(tipoTransaccion);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            var tipoTransaccion = await _context.TipoTransaccions.FindAsync(id);
-            if (tipoTransaccion != null)
+            catch (Exception)
             {
-                _context.TipoTransaccions.Remove(tipoTransaccion);
+                TempData["Error"] = "No se pudo eliminar el registro ya que está relacionado a una transacción.";
+                return RedirectToAction("Index");
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool TipoTransaccionExists(int id)
         {
-          return (_context.TipoTransaccions?.Any(e => e.IdTipoTransaccion == id)).GetValueOrDefault();
+            return (_context.TipoTransaccions?.Any(e => e.IdTipoTransaccion == id)).GetValueOrDefault();
         }
 
         //Excel 
