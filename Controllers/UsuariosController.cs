@@ -109,8 +109,17 @@ namespace HRM_PLUS_PROJECT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdUsuario,Nombre,Correo,Clave,Roles")] Usuario usuario)
         {
+
             if (ModelState.IsValid)
             {
+                var usuarioExistente = await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == usuario.Correo);
+
+                if (usuarioExistente != null)
+                {
+                    ModelState.AddModelError("Correo", "Este correo electrónico ya está en uso");
+                    return View(usuario);
+                }
+
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

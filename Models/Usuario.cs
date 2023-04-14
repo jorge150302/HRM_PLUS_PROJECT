@@ -18,7 +18,7 @@ namespace HRM_PLUS_PROJECT.Models
 
         [Display(Name = "Correo")]
         [Required(ErrorMessage = "Debe ingresar un correo")]
-        [UniqueEmail(ErrorMessage = "Este correo electrónico ya está en uso")]
+       
         [EmailAddress (ErrorMessage = "Formato de correo requerido")]
         public string Correo { get; set; }
 
