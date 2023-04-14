@@ -67,7 +67,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             return RedirectToAction("Login");
 
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {

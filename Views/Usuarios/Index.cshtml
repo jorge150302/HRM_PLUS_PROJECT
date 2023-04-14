@@ -43,10 +43,11 @@ ViewData["Title"] = "Usuarios";
                                     <th>
                                         @Html.DisplayNameFor(model => model.Correo)
                                     </th>
-                                    <th>
+                                    <!--
+                                    <th >
                                         @Html.DisplayNameFor(model => model.Clave)
-                                    </th>
-                                    <th>
+                                    </th>-->
+                                    <th >
                                         @Html.DisplayNameFor(model => model.Roles)
                                     </th>
                                     <th></th>
@@ -61,10 +62,10 @@ ViewData["Title"] = "Usuarios";
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Correo)
-                                        </td>
-                                        <td>
+                                        <!--</td>
+                                            <td style=" -webkit-text-security: disc;" >
                                             @Html.DisplayFor(modelItem => item.Clave)
-                                        </td>
+                                        </td>-->
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Roles)
                                         </td>

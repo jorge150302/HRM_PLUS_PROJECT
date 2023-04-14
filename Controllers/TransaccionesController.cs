@@ -59,7 +59,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View();
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Transacciones/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -80,7 +80,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion",  "Nombre");
             return View(transaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Transacciones/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -98,7 +98,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View(transaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Transacciones/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -135,7 +135,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             ViewData["IdTipoTransaccion"] = new SelectList(_context.TipoTransaccions.Where(x => x.IsActivo == true), "IdTipoTransaccion", "Nombre");
             return View(transaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Transacciones/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -155,7 +155,7 @@ namespace HRM_PLUS_PROJECT.Controllers
 
             return View(transaccion);
         }
-
+        [Authorize(Roles = "Administrador")]
         // POST: Transacciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
