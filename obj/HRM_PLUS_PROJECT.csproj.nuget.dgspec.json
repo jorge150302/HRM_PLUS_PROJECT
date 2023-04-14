@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {}
+    "C:\\Users\\erick\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {
+    "C:\\Users\\erick\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
+        "projectUniqueName": "C:\\Users\\erick\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
         "projectName": "HRM_PLUS_PROJECT",
-        "projectPath": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
-        "packagesPath": "C:\\Users\\sirbo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sirbo\\source\\repos\\HRM_PLUS_PROJECT\\obj\\",
+        "projectPath": "C:\\Users\\erick\\source\\repos\\HRM_PLUS_PROJECT\\HRM_PLUS_PROJECT.csproj",
+        "packagesPath": "C:\\Users\\erick\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\erick\\source\\repos\\HRM_PLUS_PROJECT\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\sirbo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\erick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,8 +79,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -88,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.311\\RuntimeIdentifierGraph.json"
         }
       }
     }

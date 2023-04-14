@@ -36,58 +36,58 @@
                 Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
             -->
             <div class="logo">
-                <a href="" class="simple-text logo-mini">
+                <a href="@Url.Action("Index", "Home")" class="simple-text logo-mini">
                     <img src="~/LogoHRM.png">
                 </a>
-                <a href="" class="simple-text logo-normal">
+                <a href="@Url.Action("Index", "Home")" class="simple-text logo-normal">
                     HRM Plus
                 </a>
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="active ">
+                    <li id="departamentos">
                         <a href="@Url.Action("Index", "Departamentos")">
                             <i class="now-ui-icons travel_istanbul"></i>
                             <p>Departamentos</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="empleados">
                         <a href="@Url.Action("Index", "Empleados")">
                             <i class="now-ui-icons users_circle-08"></i>
                             <p>Empleados</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="nominas">
                         <a href="@Url.Action("Index", "Nominas")">
                             <i class="now-ui-icons business_money-coins"></i>
                             <p>Nóminas</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="puestos">
                         <a href="@Url.Action("Index", "Puestos")">
                             <i class="now-ui-icons business_briefcase-24"></i>
                             <p>Puestos</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="tiposdeducciones">
                         <a href="@Url.Action("Index", "TiposDeducciones")">
                             <i class="now-ui-icons design_scissors"></i>
                             <p>Tipos Deducciones</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="tipostransacciones">
                         <a href="@Url.Action("Index", "TiposTransacciones")">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             <p>Tipos Transacciones</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="transacciones">
                         <a href="@Url.Action("Index", "Transacciones")">
                             <i class="now-ui-icons business_chart-bar-32"></i>
                             <p>Transacciones</p>
                         </a>
                     </li>
-                    <li>
+                    <li id="usuarios">
                         <a href="@Url.Action("Index", "Usuarios")">
                              <i class="now-ui-icons users_circle-08"></i>
                             <p>Usuarios</p>
@@ -207,6 +207,23 @@
 
         });
     </script>
+
+   <script type="text/javascript">
+    $(function() {
+        var controllerName = "@ViewContext.RouteData.Values["controller"]";
+        var actionName = "@ViewContext.RouteData.Values["action"]";
+        var $li = $("#sidebar-wrapper li#" + controllerName.toLowerCase());
+        if ($li.length > 0) {
+            $li.addClass("active");
+        }
+    });
+</script>
+
+
+
+
+
+
 </body>
 </html>
 

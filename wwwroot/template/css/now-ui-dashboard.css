@@ -2197,9 +2197,9 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 
 .form-check input[type="checkbox"],
 .radio input[type="radio"] {
-  opacity: 0;
+  opacity: 1;
   position: absolute;
-  visibility: hidden;
+  visibility: visible;
 }
 
 .form-check input[type="checkbox"]:checked+.form-check-sign::after {
