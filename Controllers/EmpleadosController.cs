@@ -149,8 +149,9 @@ namespace HRM_PLUS_PROJECT.Controllers
                 ModelState.AddModelError("Cedula", "Cédula incorrecta");
             }
 
+
             Puesto puestos = _context.Puestos.Find(empleado.IdPuesto);
-            var empleados = _context.Empleados.Where(x => x.IdPuesto == empleado.IdPuesto && x.Cedula == empleado.Cedula && x.IdEmpleado == empleado.IdEmpleado).ToList();
+            var empleados = _context.Empleados.Where(x => x.IdPuesto == empleado.IdPuesto && x.Cedula == empleado.Cedula && x.IdEmpleado != empleado.IdEmpleado).ToList();
 
             if (empleado.SalarioMensual < puestos.SalarioMinimo)
             {
