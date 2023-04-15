@@ -16,6 +16,7 @@ namespace HRM_PLUS_PROJECT.Models
         [Required(ErrorMessage = "Monto es obligatorio")]
         [Range(1, 9999999, ErrorMessage = "Ingresar un monto entre 1 y 9999999")]
         public decimal Monto { get; set; }
+        public DateTime? FechaRegistro { get; set; }
         [Display(Name = "Deducción")]
         public virtual TipoDeduccion? IdDeduccionNavigation { get; set; } = null!;
         [Display(Name = "Empleado")]

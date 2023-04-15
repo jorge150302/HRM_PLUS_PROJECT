@@ -71,12 +71,18 @@ namespace HRM_PLUS_PROJECT.Controllers
         public async Task<IActionResult> Create([Bind("IdNomina,IdEmpleado,IdDeduccion,IdTransaccion,Monto")] Nomina nomina)
         {
             Empleado empleado = _context.Empleados.Find(nomina.IdEmpleado);
+            var nominas = _context.Nominas.Where(x => x.IdEmpleado == nomina.IdEmpleado && x.FechaRegistro == DateTime.Now.Date).ToList();
 
             int fecha = DateTime.Now.Day;
 
             if (fecha != 15 && fecha != 30)
             {
                 ModelState.AddModelError("IdEmpleado", "No es Fecha de Pago ");
+            }
+
+            if (nominas.Any())
+            {
+                ModelState.AddModelError("IdEmpleado", "Existe una nómina creada para este empleado hoy ");
             }
 
 
@@ -89,6 +95,8 @@ namespace HRM_PLUS_PROJECT.Controllers
             {
                 ModelState.AddModelError("Monto", "El Monto es mayor  al Salario Mensual " + empleado.SalarioMensual);
             }
+
+            nomina.FechaRegistro = DateTime.Now.Date;
 
             if (ModelState.IsValid)
             {

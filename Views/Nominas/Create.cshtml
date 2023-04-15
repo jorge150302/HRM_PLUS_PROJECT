@@ -20,6 +20,7 @@
                                 <div class="form-group">
                                     <label asp-for="IdEmpleado" class="control-label"></label>
                 <select asp-for="IdEmpleado" class ="form-control" asp-items="ViewBag.IdEmpleado"></select>
+                <span asp-validation-for="IdEmpleado" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-3 pl-1">
@@ -46,7 +47,7 @@
                             <div class="form-group">
                             <br />
                             <input type="submit" value="Registrar" class="btn btn-primary" />
-                            <a class="btn btn-outline-info" href="@Url.Action("Index", "Transacciones")">Volver</a>
+                            <a class="btn btn-outline-info" href="@Url.Action("Index", "Nominas")">Volver</a>
                         </div>
 
                         </div>
