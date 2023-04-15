@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HRM_PLUS_PROJECT.Models;
 using OfficeOpenXml;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HRM_PLUS_PROJECT.Controllers
 {
@@ -19,6 +20,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Administrador")]
         // GET: Nominas
         public async Task<IActionResult> Index(string term = null)
         {
