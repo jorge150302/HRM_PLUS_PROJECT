@@ -82,6 +82,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
 
             Puesto puestos = _context.Puestos.Find(empleado.IdPuesto);
+            var empleados = _context.Empleados.Where(x => x.IdPuesto == empleado.IdPuesto && x.Cedula == empleado.Cedula).ToList();
 
             if (empleado.SalarioMensual < puestos.SalarioMinimo)
             {
@@ -93,6 +94,10 @@ namespace HRM_PLUS_PROJECT.Controllers
                 ModelState.AddModelError("SalarioMensual", "El Salario es mayor al máximo " + puestos.SalarioMaximo);
             }
 
+            if (empleados.Any())
+            {
+                ModelState.AddModelError("Nombre", "Empleado Registrado");
+            }
 
             empleado.UsuarioCreacion = "Marileidy";
             empleado.FechaRegistro = DateTime.Now;
@@ -145,6 +150,7 @@ namespace HRM_PLUS_PROJECT.Controllers
             }
 
             Puesto puestos = _context.Puestos.Find(empleado.IdPuesto);
+            var empleados = _context.Empleados.Where(x => x.IdPuesto == empleado.IdPuesto && x.Cedula == empleado.Cedula && x.IdEmpleado == empleado.IdEmpleado).ToList();
 
             if (empleado.SalarioMensual < puestos.SalarioMinimo)
             {
@@ -154,6 +160,11 @@ namespace HRM_PLUS_PROJECT.Controllers
             if (empleado.SalarioMensual > puestos.SalarioMaximo)
             {
                 ModelState.AddModelError("SalarioMensual", "El Salario es mayor al máximo " + puestos.SalarioMaximo);
+            }
+
+            if (empleados.Any())
+            {
+                ModelState.AddModelError("Nombre", "Empleado Registrado");
             }
 
 

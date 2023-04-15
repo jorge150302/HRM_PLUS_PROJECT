@@ -1,6 +1,68 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Nomina
 
+
 @{
+    ViewData["Title"] = "Ver Nómina";
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-category">Nómina</h5>
+                    <h4 class="card-title"> Ver Nómina</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                            <th>
+                                    @Html.DisplayNameFor(model => model.IdEmpleadoNavigation)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.IdDeduccionNavigation)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.IdTransaccionNavigation)
+                            </th>
+                            <th>
+                                    @Html.DisplayNameFor(model => model.Monto)
+                            </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => model.IdEmpleadoNavigation.FullName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.IdDeduccionNavigation.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.IdTransaccionNavigation.IdTipoTransaccionNavigation.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Monto)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="right-button">
+                            <div class="form-group">
+                                <br />
+                                @*<a href="./Edit?id=@Model?.IdTransaccion" class="btn btn-outline-primary">Editar</a>*@
+                                <a class="btn btn-outline-info" href="@Url.Action("Index", "Nominas")">Volver</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@{
     ViewData["Title"] = "Details";
 }
 
@@ -20,13 +82,13 @@
             @Html.DisplayNameFor(model => model.IdDeduccionNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdDeduccionNavigation.IdDeduccion)
+            @Html.DisplayFor(model => model.IdDeduccionNavigation.Descripcion)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdEmpleadoNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdEmpleadoNavigation.IdEmpleado)
+            @Html.DisplayFor(model => model.IdEmpleadoNavigation.Apellido)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdTransaccionNavigation)
@@ -39,4 +101,4 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.IdNomina">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@

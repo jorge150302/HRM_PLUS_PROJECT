@@ -67,7 +67,7 @@ ViewData["Title"] = "Editar Empleado";
                             <div class="col-md-4 pr-1">
                                 <div class="form-group">
                                     <label asp-for="SalarioMensual" class="control-label"></label>
-                                    <input asp-for="SalarioMensual" class="form-control" type="number"/>
+                                    <input asp-for="SalarioMensual" class="form-control"/>
                                     <span asp-validation-for="SalarioMensual" class="text-danger"></span>
                                  </div>
                              </div>
@@ -86,6 +86,7 @@ ViewData["Title"] = "Editar Empleado";
                                 <a class="btn btn-outline-info" asp-action="Index">Volver</a>
                             </div>
                         </div>
+                        @Html.HiddenFor(model => model.FechaRegistro)
                     </form>
                 </div>
             </div>

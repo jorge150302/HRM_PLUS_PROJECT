@@ -1,6 +1,74 @@
 ﻿@model HRM_PLUS_PROJECT.Models.Nomina
 
+
 @{
+    ViewData["Title"] = "Registrar Nómina";
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Registrar Nómina</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-3 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="IdEmpleado" class="control-label"></label>
+                <select asp-for="IdEmpleado" class ="form-control" asp-items="ViewBag.IdEmpleado"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="IdDeduccion" class="control-label"></label>
+                <select asp-for="IdDeduccion" class ="form-control" asp-items="ViewBag.IdDeduccion"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="IdTransaccion" class="control-label"></label>
+                <select asp-for="IdTransaccion" class ="form-control" asp-items="ViewBag.IdTransaccion"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pl-1">
+                                <div class="form-group">
+                                    <label asp-for="Monto" class="control-label"></label>
+                                    <input asp-for="Monto" class="form-control" type="number" />
+                                    <span asp-validation-for="Monto" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-button">
+                            <div class="form-group">
+                            <br />
+                            <input type="submit" value="Registrar" class="btn btn-primary" />
+                            <a class="btn btn-outline-info" href="@Url.Action("Index", "Transacciones")">Volver</a>
+                        </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+
+
+
+
+
+
+@*@{
     ViewData["Title"] = "Create";
 }
 
@@ -42,4 +110,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}*@
