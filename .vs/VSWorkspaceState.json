@@ -5,11 +5,12 @@
     "\\Data",
     "\\Models",
     "\\Views",
+    "\\Views\\Empleados",
     "\\Views\\TiposDeducciones",
     "\\wwwroot",
     "\\wwwroot\\lib",
     "\\wwwroot\\lib\\css"
   ],
-  "SelectedNode": "\\HRM_PLUS_PROJECT.sln",
+  "SelectedNode": "\\Views\\Empleados\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }
